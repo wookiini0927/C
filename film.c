@@ -3,9 +3,8 @@
 
 /**************************
 *
-*	Derniere MAJ 9/11 :
-*	rechercheFilm() changement des paraemtres a rajouter
-*	commentaire dans film.h
+*	Derniere MAJ 16/11 :
+*	Ajout : recherche_FilmRealisateur()
 *
 ***************************/
 
@@ -14,7 +13,7 @@ void saisirFilm(Film *film){
 	int taille_utile=0;
 	int i=0;
 	int arret = 1; /*continue sinon 0 et stop*/
-	char rep[1];
+	char rep[REPONSE];
 	char temp[TAILLE]; //variable temporaire pour avoir l'annee
 
 	printf("Entrez le titre :\n");
@@ -84,9 +83,12 @@ void affichageFilm(const Film *film){
 }
 
 void rechercheFilm(Film tab[], int taille, char *chercheTitre){
-		
+	;	
 }
 
+void rechercheAnnee(Film tab[], int taille, int chercheAnnee){
+	;
+}
 /*void rechercheGenre(Film tab[], int taille, int genre);*/
 
 void conversionDuree(const Film *film){

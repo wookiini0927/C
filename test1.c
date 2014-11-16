@@ -1,9 +1,10 @@
 /************************************************
 *
 *	Derniere MAJ : 16 Novembre
-*		fonction choix1() : fscanf->scanf
-*		Definition fonction choix1 
-*		Commentaires (.h)
+*		fonction choix1() : definition modifié
+*		fonction test1 -> test1_menu()
+*			choix de type char
+*		
 *
 *	Pas sur de l'utilité de la fonction choix2() choix3()
 *	A discuter
@@ -30,26 +31,29 @@
 *	
 *	Renvoi vers uen autre fonction
 */
-void test1(){
-	int choix;
+void test1_menu(){
+
+	/*Variable locale : choix (type char *), taile 127, reserve en memoire le type d'utilisation*/ 
+	char choix[REPONSE];
+
 	do{
 		printf("-------------Recherche-----------\n");
-		printf("|\t1-Film\t\t\t|\n");
-		printf("|\t2-Realisateur\t\t|\n");
-		printf("|\t3-Acteurs/actrices\t|\n");
+		printf("|\tA-Film\t\t\t|\n");
+		printf("|\tB-Realisateur\t\t|\n");
+		printf("|\tC-Acteurs/actrices\t|\n");
 		printf("---------------------------------\n");
 		
-		scanf("%d", &choix);
-	}while(choix !=1 && choix !=2 && choix !=3);
+		fgets(choix, CHAR_MAX, stdin);
+	}while(*choix !='A' && *choix !='a' && *choix !='B' && *choix !='b' && *choix != 'C' && *choix != 'c');
 
-	if (choix == 1){
+	if (*choix == 'A' || *choix == 'a'){
 		choix1();
 	}
-	else if (choix == 2){
+	else if (*choix == 2){
 		//choix2();
 		;
 	}
-	else if (choix == 3){
+	else if (*choix == 3){
 		//choix3();
 		;
 	}
@@ -63,43 +67,73 @@ void test1(){
 *	Renvoi a la fonction de recherche dans le fichier film
 */
 void choix1(){
-	int critere;
+
+	char critere[REPONSE];
 	char buffer[TAILLE];
 	int year;
+	int duree;
+	Film film[TAILLE];
+
 
 	do{
 			printf("--------Type de recherche--------\n");
-			printf("|\t1-Titre\t\t\t|\n");
-			printf("|\t2-Annee\t\t\t|\n");
-			printf("|\t3-Duree\t\t\t|\n");
-			printf("|\t4-Realisateur\t\t|\n");
-			printf("|\t5-Acteurs\t\t|\n");
-			printf("|\t6-Genre\t\t|\n");
+			printf("|\tA-Titre\t\t\t|\n");
+			printf("|\tB-Annee\t\t\t|\n");
+			printf("|\tC-Duree\t\t\t|\n");
+			printf("|\tD-Realisateur\t\t|\n");
+			printf("|\tE-Acteurs\t\t|\n");
+			printf("|\tF-Genre\t\t\t|\n");
 			printf("---------------------------------\n");
 
-			scanf("%d",&critere);
-	}while(critere != 1 && critere != 2 && critere!=3 && critere != 4 && critere != 5 && critere !=6);
-
-	if(critere == 1){
+			fgets(critere, CHAR_MAX, stdin);
+	}while(*critere !='A' && *critere !='a' && *critere !='B' && *critere !='b' && *critere != 'C' && *critere != 'c' && *critere != 'D' && *critere !='d' && *critere != 'E' && *critere !='e' && *critere != 'F' && *critere !='f');
+	
+	if (*critere == 'A' || *critere == 'a'){
+		/**
+		*Recherche d'un film par son titre
+		*Affiche sa fiche
+		**/
 		printf("Quel est le film que vous cherchez ?\n");
 		fgets(buffer, TAILLE, stdin);
 		rechercheFilm(film, TAILLE, buffer);
 	}
-	else if(critere == 2){
+	else if (*critere == 'B' || *critere == 'b'){
+		/**
+		*Recherche les films sortie dans l'annee demande
+		*Liste tous les films sortie durant cette annee
+		**/
 		printf("Quel est l'annee que vous cherchez ?\n");
-		fscanf(stdin, "%d", &year);
+		do{
+			fgets(buffer, TAILLE, stdin);
+
+			if(verification_digit(buffer)){
+				year = atoi(buffer);
+			}
+		}while(verification_digit(buffer) == 0);
+
 		rechercheAnnee(film, TAILLE, year);
 	}
-	else if(critere == 3){
+	else if (*critere == 'C' || *critere == 'c'){
+		printf("Duree de film maximum (en min)?\n");
+		fscanf(stdin, "%d", &duree);
+		rechercheDuree(film, TAILLE, duree);
+	}
+	/**
+	* Pour la rechercher acteru/realisateur
+	* on ne fera pas la difference prenom/nom
+	* on cherchera dans les deux criteres
+	**/
+	else if (*critere == 'D' || *critere == 'd'){
+		printf("Quel est le nom ou le prenom du realisateur?\n");
+		fgets(buffer, TAILLE, stdin);
+		recherche_FilmRealisateur(film, TAILLE, buffer)
+	}
+	else if (*critere == 'E' || *critere == 'e'){
+
 		;
 	}
-	else if(critere == 4){
-		;
-	}
-	else if(critere == 5){
-		;
-	}
-	else if(critere == 6){
+	else if (*critere == 'F' || *critere == 'f'){
+
 		;
 	}
 

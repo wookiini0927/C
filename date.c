@@ -22,6 +22,7 @@ int verification_digit(const char *d){
 		}
 		i++;
 	}
+
 	return is_chiffre;
 }
 

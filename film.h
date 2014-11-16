@@ -11,6 +11,7 @@ DEFINITION D'UN FILM et GENRE
 *********************************/
 
 #define TAILLE 64
+#define REPONSE 1
 #define T_C 4
 
 
@@ -61,8 +62,8 @@ void affichageFilm(const Film *film);
  * Paramètre taille : taille du tableau de film.
  * Paramètre chercheTitre : titre du film à trouver.
  *
- * Affiche : la fiche du film demandé
- * sinon : envoi un message d'erreur et propose de le rajouter dans la BDD
+ * Affiche : la fiche du film demandé 
+ * sinon : envoi un message d'erreur et propose de rajotuer une nouvelle fiche
  **/
 void rechercheFilm(Film tab[], int taille, char *chercheTitre);
 
@@ -104,6 +105,20 @@ void rechercheDuree(Film tab[], int taille, int critDur);
  * sinon : envoi un message d'erreur
  **/
 void rechercheGenre(Film tab[], int taille, Genre genre);
+
+/**
+ * Recherche dans la BDD des films,
+ * tous les films du realisateur demandé
+ *
+ * Paramètre tab : tableau de films à parcourir.
+ * Paramètre taille : taille du tableau de film.
+ * Paramètre name : nom ou prenom du realisateur.
+ *
+ * Affiche : la liste des film fait par le realisateur
+ * sinon : envoi un message d'erreur
+ **/
+void recherche_FilmRealisateur(Film tab[], int taille, const char *name);
+
 
 /*convertie la duree rentree en minutes en heures et minutes
 *	@param : film de type Film

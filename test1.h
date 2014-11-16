@@ -2,6 +2,7 @@
 #define TEST1_H_INCLUDED 
 
 #include <stdio.h>
+#include <limits.h>
 #include "film.h"
 #include "personne.h"
 
@@ -13,7 +14,7 @@
 *
 * Renvoi alors un nouveau menu en fonction du choix
 **/
-void test1();
+void test1_menu();
 
 /**
 * Le critere de recherche se porte sur les informations d'un film
