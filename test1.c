@@ -1,7 +1,7 @@
 /************************************************
 *
 *	Derniere MAJ : 16 Novembre
-*		fonction choix1()
+*		fonction choix1() : fscanf->scanf
 *		Definition fonction choix1 
 *		Commentaires (.h)
 *
