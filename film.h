@@ -33,7 +33,7 @@ typedef struct Film{
 	Personne realisateur;
 	Personne casting[T_C];
 	int duree;
-	Genre genre;
+	Genre genre[2];
 }Film;
 
 /******************************
@@ -104,7 +104,7 @@ void rechercheDuree(Film tab[], int taille, int critDur);
  * Affiche : la liste des film qui dure moins que la duree demande
  * sinon : envoi un message d'erreur
  **/
-void rechercheGenre(Film tab[], int taille, Genre genre);
+void rechercheGenre(Film tab[], int taille, const char* genre);
 
 /**
  * Recherche dans la BDD des films,
@@ -118,6 +118,21 @@ void rechercheGenre(Film tab[], int taille, Genre genre);
  * sinon : envoi un message d'erreur
  **/
 void recherche_FilmRealisateur(Film tab[], int taille, const char *name);
+
+/**
+ * Recherche dans la BDD des films,
+ * tous les films de l'acteur/actrice demandé
+ *
+ * Paramètre tab : tableau de films à parcourir.
+ * Paramètre taille : taille du tableau de film.
+ * Paramètre name : nom ou prenom du realisateur.
+ *
+ * Affiche : la liste des film dans lequel joue l'acteur/actrice
+ * sinon : envoi un message d'erreur
+ **/
+
+void recherche_FilmActeur(Film tab[], int taille, const char *name);
+
 
 
 /*convertie la duree rentree en minutes en heures et minutes

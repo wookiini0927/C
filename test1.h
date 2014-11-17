@@ -14,7 +14,7 @@
 *
 * Renvoi alors un nouveau menu en fonction du choix
 **/
-void test1_menu();
+void test1_menu(Film tab, int taille);
 
 /**
 * Le critere de recherche se porte sur les informations d'un film
@@ -22,7 +22,7 @@ void test1_menu();
 *
 * Renvoi à la fonction de recherche demander, (dans le fichier film.c)
 **/
-void choix1();
+void choix1(Film tab, int taille);
 
 /**
 * Le critere de recherche se porte sur les informations d'un realisatuer

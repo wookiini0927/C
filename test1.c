@@ -1,8 +1,8 @@
 /************************************************
 *
 *	Derniere MAJ : 16 Novembre
-*		fonction choix1() : definition modifié
-*		fonction test1 -> test1_menu()
+*		fonction choix1() -> choix1(Film tab, int taille) definition modifié
+*		fonction test1 -> test1_menu(Film tab, int taille)
 *			choix de type char
 *		
 *
@@ -31,7 +31,7 @@
 *	
 *	Renvoi vers uen autre fonction
 */
-void test1_menu(){
+void test1_menu(Film tab, int taille){
 
 	/*Variable locale : choix (type char *), taile 127, reserve en memoire le type d'utilisation*/ 
 	char choix[REPONSE];
@@ -66,14 +66,12 @@ void test1_menu(){
 *
 *	Renvoi a la fonction de recherche dans le fichier film
 */
-void choix1(){
+void choix1(Film tab, int taille){
 
 	char critere[REPONSE];
 	char buffer[TAILLE];
 	int year;
 	int duree;
-	Film film[TAILLE];
-
 
 	do{
 			printf("--------Type de recherche--------\n");
@@ -115,26 +113,35 @@ void choix1(){
 	}
 	else if (*critere == 'C' || *critere == 'c'){
 		printf("Duree de film maximum (en min)?\n");
-		fscanf(stdin, "%d", &duree);
+		do{
+			fgets(buffer, TAILLE, stdin);
+
+			if(verification_digit(buffer)){
+				duree = atoi(buffer);
+			}
+		}while(verification_digit(buffer) == 0);
 		rechercheDuree(film, TAILLE, duree);
 	}
+
 	/**
-	* Pour la rechercher acteru/realisateur
+	* Pour la rechercher acteur/realisateur
 	* on ne fera pas la difference prenom/nom
 	* on cherchera dans les deux criteres
 	**/
 	else if (*critere == 'D' || *critere == 'd'){
 		printf("Quel est le nom ou le prenom du realisateur?\n");
 		fgets(buffer, TAILLE, stdin);
-		recherche_FilmRealisateur(film, TAILLE, buffer)
+		recherche_FilmRealisateur(film, TAILLE, buffer);
 	}
 	else if (*critere == 'E' || *critere == 'e'){
-
-		;
+		printf("Quel est le nom ou le prenom de l'acteur/actrice?\n");
+		fgets(buffer, TAILLE, stdin);
+		recherche_FilmActeur(film, TAILLE, buffer);
 	}
 	else if (*critere == 'F' || *critere == 'f'){
-
-		;
+		printf("Quel genre?\n");
+		fgets(buffer, TAILLE, stdin);
+		rechercheGenre(film, TAILLE, buffer);
 	}
 
 
