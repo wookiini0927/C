@@ -89,6 +89,18 @@ void rechercheFilm(Film tab[], int taille, char *chercheTitre){
 void rechercheAnnee(Film tab[], int taille, int chercheAnnee){
 	;
 }
+
+void rechercheDuree(Film tab[], int taille, int critDur){
+	;
+}
+
+void recherche_FilmRealisateur(Film tab[], int taille, const char *name){
+	;
+}
+
+void recherche_FilmActeur(Film tab[], int taille, const char *name){
+	;
+}
 /*void rechercheGenre(Film tab[], int taille, int genre);*/
 
 void conversionDuree(const Film *film){

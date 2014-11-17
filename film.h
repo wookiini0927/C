@@ -33,7 +33,7 @@ typedef struct Film{
 	Personne realisateur;
 	Personne casting[T_C];
 	int duree;
-	Genre genre[2];
+	Genre genre;
 }Film;
 
 /******************************

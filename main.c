@@ -1,11 +1,10 @@
 /******************************
 *
-*	Derniere MAJ 16/11 :
-*		Changement du type choix : int ->char[] et tous les changement qui vont avec	
+*	Derniere MAJ 17/11 :
+*		taille de choix
 *
 *******************************/
 
-#include <limits.h>
 #include "film.h"
 #include "personne.h"
 #include "test1.h"
@@ -16,10 +15,13 @@ int main(int argc, char const *argv[])
 {
 	/* code */
 
-	/*Variable locale : choix (type char *), taile 127, reserve en memoire le type d'utilisation*/ 
+	/*Variable locale : choix (type char *), taile 1, reserve en memoire le type d'utilisation*/ 
 	char choix[REPONSE];
 
-	Film fim[TAILLE];
+	Film film[TAILLE];
+	Personne realisateur[TAILLE];
+	Personne acteur[TAILLE];
+
 
 	/*On choisis de quel maniere on va utiliser les BDD*/
 	do{
@@ -29,12 +31,12 @@ int main(int argc, char const *argv[])
 		printf("|\tC-Creez votre BDD a partir d'un fichier\t|\n");
 		printf("-------------------------------------------------\n");
 		
-		fgets(choix, CHAR_MAX, stdin);
+		fgets(choix, REPONSE, stdin);
 	}while(*choix !='A' && *choix !='a' && *choix !='B' && *choix !='b' && *choix != 'C' && *choix != 'c');
 
 	if (*choix == 'A' || *choix == 'a'){
 		//BDD déja existante
-		test1_menu();
+		test1_menu(film, TAILLE);
 	}
 	else if (*choix == 'B' || *choix == 'b'){
 		//saisie manuelle
