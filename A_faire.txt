@@ -1,0 +1,14 @@
+Ce qui reste a faire : plus important au -
+
+Tous les algos de recherches, a commencer par le fichier Personne.c
+A savoir comment on fait leur appel car si on distingue acteur et realisateur on rappelle les meme fonctions donc ca peut etre redondant...
+Faire la fonntion dateCompare (je sais pas encore l'utilité ou comment l'utilisera  y reflechir)
+
+puis algo de recherhce sur les film (film.c) sera plus facile apres avoir fait ceux de personne
+
+Saisie manuelle (test2.c);
+
+recupereation dedonnes sur fichier (test3.c)
+
+et apres ca optimiser et rendre super beau notre code avectous les commentaires
+
