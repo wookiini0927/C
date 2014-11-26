@@ -47,6 +47,22 @@ void clean(char *chaine);
 void echange_chariot_espace(char *chaine);
 
 /**
+*
+* initialisation de la BDD en dur
+*
+* Parametre p : pointeur qui sera la case du tableau
+* Param nom : nom de la personne
+* Param prenom : prenom de la personne
+* Param j : jour de naissance
+* Param m : mois de naissance
+* Param a : annee de naissance
+* Param nationality : nationalite de la personne
+* Param stat : metier de la personne
+*
+**/
+void init_tableau_Personne(Personne *p, const char *nom, const char *prenom, const int j, const int m, const int a, const char *nationality, const Metier stat);
+
+/**
  * Saisie manuelle des personnes dans la BDD
  *
  * Paramètre personne : la personne a rajouter

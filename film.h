@@ -42,6 +42,24 @@ FONCTIONS
 *******************************/
 
 /**
+*
+* initialisation de la BDD en dur
+*
+* Parametre f : pointeur qui sera la case du tableau
+* Param titre : titre du film
+* Param date : annee de sortie
+* Param real : case du tableau correspondant au realisateur
+* Param duree : duree du film
+* Param genre : Genre du film
+* Param a1 : acteur 1
+* Param a2 : acteur 2
+* Param a3 : acteur 3
+* Param a4 : acteur 4
+*
+**/
+void init_tableau_film(Film *f, const char *titre, const int date, Personne *real, const int duree, const Genre genre, Personne *a1, Personne *a2, Personne *a3, Personne *a4);
+
+/**
  * Saisie manuelle des films dans la BDD
  *
  * Paramètre film : le film a rajouter

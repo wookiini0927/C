@@ -41,6 +41,18 @@ void echange_chariot_espace(char *chaine){
 	}
 }
 
+void init_tableau_Personne(Personne *p, const char *nom, const char *prenom, const int j, const int m, const int a, const char *nationality, const Metier stat)
+{
+	strcpy(p->nom, nom);
+	strcpy(p->prenom, prenom);
+	p->dob.jour = j;
+	p->dob.mois = m;
+	p->dob.annee = a;
+	strcpy(p->nationalite, nationality);
+	p->statut = stat;
+
+}
+
 void saisirPersonne(Personne *personne){
 
 	char temp[TAILLE];
@@ -112,70 +124,69 @@ char* minuscules(const char *chaine){
 }
 
 void rechercheNom(Personne tab[], int taille, const char *nom){
-
+	
 	int i = 0;
 	int j = 0;
-	int cmpt =0;
 	int taille_utile = 0;
 
-	char mot[TAILLE];
+	char *chaine_tmp;
 	char tab_cp[TAILLE];
 	char *tmp;
-	Personne tab_tmp[TAILLE];
 
-	printf("%s\n",nom );
+	chaine_tmp = (char*) malloc(TAILLE*sizeof(char));
 
+	printf("chaine : %s\n",nom );
+
+	chaine_tmp = minuscules(nom);
+
+	printf("chaine tmp : %s\n", chaine_tmp);
 
 	//transformer cette boucle en une fonction
-	while(*nom !='\0'){
+	/*while(*nom !='\0'){
 		//convertis en lowercase le titre
 		mot[i] = tolower(*nom);
 		nom++;
 		i++;
 	}
 	mot[i] = '\0'; //ajout caractere de fin del igne
-	//printf("sfdg :%s\n", mot);
+	printf("chaine : %s\n", mot);*/
 
 	i=0;
 	while(i<2){
+		printf("\n");
+		printf("chaine a comparer :%s\n", chaine_tmp );
 		printf("boucle \n");
-		printf("%s\n", tab[i].nom );
+		printf("tab titre : %s\n", tab[i].nom );
 
 		while(tab[i].nom[j] !='\0'){
+			printf("taille_utile\n");
 			//recupere la taille du titre dans le tableau
 			taille_utile++;
 			j++;
 		}
-
+		printf("%d\n", taille_utile );
 		tmp = tab[i].nom;
+
+		printf("tmp %s\n",  tab[i].nom);
 		j=0;
 		while(j<taille_utile){
 			//convertis le titre dans le tableau en lowercase
 			tab_cp[j] = tolower(tmp[j]);
-			j++;
+			j++;	
 		}
 		tab_cp[j] = '\0'; //ajout caractere de finde ligne
 			printf("tab : %s\n", tab_cp);
 
-		j = 0;
-		taille_utile = 0;
-		if(strcmp(tab_cp, mot)){
-			cmpt++;
-			tab_tmp[j] = tab[i];
-			taille_utile++;
-			j++;
+		if(strcmp(tab_cp, chaine_tmp) == 0){
+			int comp = strcmp(tab_cp, chaine_tmp);
+			printf("%d\n", comp );
+			printf("\n");
+			printf("Compare\n");
+			affichagePersonne(&tab[i]);
 		}
 			i++;
 	}
 
-	if (cmpt == 1){
-		affichagePersonne(&tab_tmp[0]);
-	}
-	else{
-		for(i=0; i < taille_utile; i++){
-			printf("%s %s\n", tab_tmp[i].nom, tab_tmp[i].prenom);
-		}
-	}
 }
 
 

@@ -8,6 +8,21 @@
 *
 ***************************/
 
+void init_tableau_film(Film *f, const char *titre, const int date, Personne *real, const int duree, const Genre genre, Personne *a1, Personne *a2, Personne *a3, Personne *a4)
+{
+	strcpy(f->titre, titre);
+	f->annee = date;
+	f->realisateur = *real;
+	f->duree = duree;
+	f->genre = genre;
+
+	f->casting[0] = *a1;
+	f->casting[1] = *a2;
+	f->casting[2] = *a3;
+	f->casting[3] = *a4;
+
+}
+
 void saisirFilm(Film *film){
 
 	int taille_utile=0;
