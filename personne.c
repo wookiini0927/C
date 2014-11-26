@@ -63,7 +63,7 @@ void saisirPersonne(Personne *personne){
 
 	do{
 		do{
-			printf("Est ce un acteur ou un realisateur\n1-Realisateur\n0-Acteur\n");
+			printf("Est ce un acteur ou un realisateur\n0-Realisateur\n1-Acteur\n");
 			fgets(temp, TAILLE, stdin);
 		}while(verification_digit(temp) == 0 || strlen(temp)>2);
 		//scanf(" %c", &personne->statut);
@@ -88,9 +88,95 @@ void affichagePersonne(const Personne *personne){
 	printf("-----------------------------------------\n");
 }
 
-/*void recherchePersonne(Personne tab[], int taille, const char *nom){
+char* minuscules(const char *chaine){
+	//transformer cette boucle en une fonction
 
-}*/
+	int i = 0; //compteur pour le tableau temporaire
+	char *mot; //pointeur temporaire qui  garde la version minuscule
+
+	mot = (char*) malloc(TAILLE * (sizeof(char)));
+
+	/**
+	*on convertis chaque lettre en minuscule et le stock dans un tableau temporaire
+	**/
+	while(*chaine !='\0'){
+		//convertis en lowercase le titre
+		mot[i] = tolower(*chaine);
+		chaine++;
+		i++;
+	}
+	mot[i] = '\0'; //ajout caractere de fin de ligne
+
+	return mot;
+	//printf("sfdg :%s\n", mot);
+}
+
+void rechercheNom(Personne tab[], int taille, const char *nom){
+
+	int i = 0;
+	int j = 0;
+	int cmpt =0;
+	int taille_utile = 0;
+
+	char mot[TAILLE];
+	char tab_cp[TAILLE];
+	char *tmp;
+	Personne tab_tmp[TAILLE];
+
+	printf("%s\n",nom );
+
+
+	//transformer cette boucle en une fonction
+	while(*nom !='\0'){
+		//convertis en lowercase le titre
+		mot[i] = tolower(*nom);
+		nom++;
+		i++;
+	}
+	mot[i] = '\0'; //ajout caractere de fin del igne
+	//printf("sfdg :%s\n", mot);
+
+	i=0;
+	while(i<2){
+		printf("boucle \n");
+		printf("%s\n", tab[i].nom );
+
+		while(tab[i].nom[j] !='\0'){
+			//recupere la taille du titre dans le tableau
+			taille_utile++;
+			j++;
+		}
+
+		tmp = tab[i].nom;
+		j=0;
+		while(j<taille_utile){
+			//convertis le titre dans le tableau en lowercase
+			tab_cp[j] = tolower(tmp[j]);
+			j++;
+		}
+		tab_cp[j] = '\0'; //ajout caractere de finde ligne
+			printf("tab : %s\n", tab_cp);
+
+		j = 0;
+		taille_utile = 0;
+		if(strcmp(tab_cp, mot)){
+			cmpt++;
+			tab_tmp[j] = tab[i];
+			taille_utile++;
+			j++;
+		}
+			i++;
+	}
+
+	if (cmpt == 1){
+		affichagePersonne(&tab_tmp[0]);
+	}
+	else{
+		for(i=0; i < taille_utile; i++){
+			printf("%s %s\n", tab_tmp[i].nom, tab_tmp[i].prenom);
+		}
+	}
+}
 
 
 void conversionMetier(Metier statut){

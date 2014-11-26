@@ -83,7 +83,59 @@ void affichageFilm(const Film *film){
 }
 
 void rechercheFilm(Film tab[], int taille, char *chercheTitre){
-	;	
+	
+	int i = 0;
+	int j = 0;
+	int taille_utile = 0;
+
+	char mot[TAILLE];
+	char tab_cp[TAILLE];
+	char *tmp;
+
+	printf("chaine : %s\n",chercheTitre );
+
+
+	//transformer cette boucle en une fonction
+	while(*chercheTitre !='\0'){
+		//convertis en lowercase le titre
+		mot[i] = tolower(*chercheTitre);
+		chercheTitre++;
+		i++;
+	}
+	mot[i] = '\0'; //ajout caractere de fin del igne
+	//printf("sfdg :%s\n", mot);
+
+	i=0;
+	while(i<2){
+		printf("boucle \n");
+		printf("tab titre%s\n", tab[i].titre );
+
+		/*while(tab[i].titre[j] !='\0'){
+			//recupere la taille du titre dans le tableau
+			taille_utile++;
+			j++;
+		}*/
+
+		tmp = tab[i].titre;
+
+		printf("tmp %s\n",  tab[i].titre);
+		j=0;
+		while(j<taille_utile){
+			//convertis le titre dans le tableau en lowercase
+			tab_cp[j] = tolower(tmp[j]);
+			j++;
+		}
+		tab_cp[j] = '\0'; //ajout caractere de finde ligne
+			printf("tab : %s\n", tab_cp);
+
+		if(strcmp(tab_cp, mot)){
+			printf("\n");
+			printf("Compare\n");
+			affichageFilm(&tab[i]);
+		}
+			i++;
+	}
+
 }
 
 void rechercheAnnee(Film tab[], int taille, int chercheAnnee){

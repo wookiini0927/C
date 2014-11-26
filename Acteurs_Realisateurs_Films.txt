@@ -1,0 +1,84 @@
+Personnes:
+
+{"Downey Jr", "Robert", {4,4,1965}, "Americaine", ACTEUR};
+{"Bale", "Christian", {30,1,1974}, "Britannique", ACTEUR};
+{"DiCaprio", "Leonardo", {11,12,1974}, "Americaine", ACTEUR};
+{"Grant", "Hugh", {9,9,1960}, "Britannique", ACTEUR};
+{"Tyler", "Liv", {1,7,1977}, "Americaine", ACTEUR};
+{"Beckinsale", "Kate", {26,7,1973}, "Britannique", ACTEUR};
+{"Crowe", "Russell", {7,4,1964}, "Neo_zelandaise", ACTEUR};
+{"Phoenix", "Joaquin", {28,10,1974}, "Americaine", ACTEUR};
+{"Bellucci", "Monica", {30,9,1964}, "Italienne", ACTEUR};
+{"Roberts", "Julia", {28,10,1967}, "Americaine", ACTEUR};
+{"Dujardin", "Jean", {19,6,1972}, "Francaise", ACTEUR};
+{"Cotillard", "Marion", {30,9,1975}, "Francaise", ACTEUR};
+
+{"Hitchcock", "Alfred", {13,8,1899}, "Britannique", REALISATEUR};
+{"Eastwood", "Clint", {31,5,1930}, "Americaine", REALISATEUR};
+{"Kubrick", "Stanley", {26,7,1928}, "Americaine", REALISATEUR};
+{"Scorsese", "Martin", {17,11,1942}, "Americaine", REALISATEUR};
+{"Allen", "Woody", {1,12,1935}, "Americaine", REALISATEUR};
+{"Jackson", "Peter", {31,10,1961}, "Neo_zelandaise", REALISATEUR};
+{"Hazanavicius", "Michel", {29,3,1967}, "Francaise", REALISATEUR};
+{"Nolan", "Christopher", {30,7,1970}, "Britannique", REALISATEUR};
+{"Scott", "Ridley", {30,11,1937}, "Britannique", REALISATEUR};
+{"Cuaron", "Alfonso", {28,11,1961}, "Mexicaine", REALISATEUR};
+
+Films:
+
+{"Gladiator", 2000, Ridley Scott, {Russell Crowe, Joaquin Phoenix, Connie Nielsen}, 155, ACTION};
+{"Intouchables", 2011, Eric Toledano, {Francois Cluzet, Omar Sy, Anne Le Ny}, 112, COMEDIE};
+{"Inception", 2010, Christopher Nolan, {Leonardo DiCaprio, Marion Cotillard, Ellen Page}, 188, SCIENCE_FICTION};
+{"Gravity", 2013, Alfonso Cuaron, {Sandra Bullock, George Clooney, Ed Harris}, 90, SCIENCE_FICTION};
+{"Interstellar", 2014, Christopher Nolan, {Matthew McConaughey, Anne Hathaway, Michael Caine},	169, SCIENCE_FICTION};
+{"Django_Unchained", 2013, Quentin Tarantino, {Jamie Foxx, Christoph Waltz, Leonardo DiCaprio}, 164, ACTION};
+{"Insaisissables", 2013, Louis Leterrier, {Jesse Eisenberg, Mark Ruffalo, Woody Harrelson}, 116, POLICIER};
+{"Elysium", 2013, Neill Blomkamp, {Matt Damon, Jodie Foster, Sharlto Copley}, 110, ACTION};
+{"Avatar", 2009, James Cameron, {Sam Worthington, Zoe Saldana, Sigourney Weaver}, 162, SCIENCE_FICTION};
+{"Australia", 2008, Baz Luhrmann, {Nicole Kidman, Hugh Jackman, David Wenham}, 155, DRAME};
+{"Hitman", 2007, Xavier Gens, {Timothy Olyphant, Dougray Scott, Olga Kurylenko}, 93, POLICIER};
+
+    /******************
+    **  REALISATEUR  **
+    ******************/
+
+    Personne realisateur[1]={{"Cuaron", "Alfonso", {28,11,1961}, "Mexicaine", REALISATEUR}};
+    Personne realisateur[2]={{"Scott", "Ridley", {30,11,1937}, "Britannique", REALISATEUR}};
+    Personne realisateur[3]={{"Nolan", "Christopher", {30,7,1970}, "Britannique", REALISATEUR}};
+    Personne realisateur[4]={{"Hazanavicius", "Michel", {29,3,1967}, "Francaise", REALISATEUR}};
+    Personne realisateur[5]={{"Jackson", "Peter", {31,10,1961}, "Neo_zelandaise", REALISATEUR}};
+    Personne realisateur[6]={{"Allen", "Woody", {1,12,1935}, "Americaine", REALISATEUR}};
+    Personne realisateur[7]={{"Scorsese", "Martin", {17,11,1942}, "Americaine", REALISATEUR}};
+    Personne realisateur[8]={{"Kubrick", "Stanley", {26,7,1928}, "Americaine", REALISATEUR}};
+    Personne realisateur[9]={{"Eastwood", "Clint", {31,5,1930}, "Americaine", REALISATEUR}};
+    Personne realisateur[10]={{"Hitchcock", "Alfred", {13,8,1899}, "Britannique", REALISATEUR}};
+
+    /*************
+    **  ACTEUR  **
+    *************/
+
+	Personne acteur[1]={{"Dujardin", "Jean", {19,6,1972}, "Francaise", ACTEUR}};
+	Personne acteur[2]={{"Roberts", "Julia", {28,10,1967}, "Americaine", ACTEUR}};
+	Personne acteur[3]={{"Bellucci", "Monica", {30,9,1964}, "Italienne", ACTEUR}};
+	Personne acteur[4]={{"Phoenix", "Joaquin", {28,10,1974}, "Americaine", ACTEUR}};
+	Personne acteur[5]={{"Crowe", "Russell", {7,4,1964}, "Neo_zelandaise", ACTEUR}};
+	Personne acteur[6]={{"Cotillard", "Marion", {30,9,1975}, "Francaise", ACTEUR}};
+	Personne acteur[7]={{"Sy", "Omar", {20,1,1978}, "Francaise", ACTEUR}};
+	Personne acteur[8]={{"Tyler", "Liv", {1,7,1977}, "Americaine", ACTEUR}};
+	Personne acteur[9]={{"Bale", "Christian", {30,1,1974}, "Britannique", ACTEUR}};
+	Personne acteur[10]={{"DiCaprio", "Leonardo", {11,12,1974}, "Americaine", ACTEUR}};
+
+	/*************
+	**	 FILM   **
+	**************/
+
+	Film film[1]={{"Avengers\0", 2012, realisateur[0], {acteur[0], acteur[1], acteur[2], acteur[3]}, 144, ACTION}};
+    Film film[2]={{"Gladiator", 2000, Ridley Scott, {Russell Crowe, Joaquin Phoenix, Connie Nielsen}, 155, ACTION}};
+    Film film[3]={{"Intouchables", 2011, Eric Toledano, {Francois Cluzet, Omar Sy, Anne Le Ny}, 112, COMEDIE}};
+    Film film[4]={{"Inception", 2010, Christopher Nolan, {Leonardo DiCaprio, Marion Cotillard, Ellen Page}, 188, SCIENCE_FICTION}};
+    Film film[5]={{"Gravity", 2013, Alfonso Cuarnn, {Sandra Bullock, George Clooney, Ed Harris}, 90, SCIENCE_FICTION}};
+    Film film[6]={{"Interstellar", 2014, Christopher Nolan, {Matthew McConaughey, Anne Hathaway, Michael Caine},	169, SCIENCE_FICTION}};
+    Film film[7]={{"Django_Unchained", 2013, Quentin Tarantino, {Jamie Foxx, Christoph Waltz, Leonardo DiCaprio}, 164, ACTION}};
+    Film film[8]={{"Insaisissables", 2013, Louis Leterrier, {Jesse Eisenberg, Mark Ruffalo, Woody Harrelson}, 116, POLICIER}};
+    Film film[9]={{"Elysium", 2013, Neill Blomkamp, {Matt Damon, Jodie Foster, Sharlto Copley}, 110, ACTION}};
+    Film film[10]={{"Australia", 2008, Baz Luhrmann, {Nicole Kidman, Hugh Jackman, David Wenham}, 155, DRAME}};
