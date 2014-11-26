@@ -1,9 +1,10 @@
-#ifndef FINI_H_INCLUDED
-#define FINI_H_INCLUDED 
+#ifndef FILM_H_INCLUDED
+#define FILM_H_INCLUDED 
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "personne.h"
 
 /********************************
@@ -11,7 +12,7 @@ DEFINITION D'UN FILM et GENRE
 *********************************/
 
 #define TAILLE 64
-#define REPONSE 1
+#define REPONSE 2
 #define T_C 4
 
 

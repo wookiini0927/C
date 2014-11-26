@@ -61,6 +61,8 @@ void saisirPersonne(Personne *personne);
  **/
 void affichagePersonne(const Personne *personne);
 
+char* minuscules(const char *chaine);
+
 /**
  * Recherche dans la BDD des personnes (acteur ou realisateur) 
  * l'acteur ou relaisateur ayant le nom ou le prenom demande
@@ -74,7 +76,7 @@ void affichagePersonne(const Personne *personne);
  *			sinon affiche la fiche direct
  * 			sinon : envoi un message d'erreur et propose de le rajouter dans la BDD
  **/
-void recherchePersonne(Personne tab[], int taille, const char *nom);
+void rechercheNom(Personne tab[], int taille, const char *nom);
 
 
 /*convertie le metier de la personne en charactere
