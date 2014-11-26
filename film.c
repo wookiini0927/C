@@ -103,19 +103,22 @@ void rechercheFilm(Film tab[], int taille, char *chercheTitre){
 		i++;
 	}
 	mot[i] = '\0'; //ajout caractere de fin del igne
-	//printf("sfdg :%s\n", mot);
+	printf("chaine : %s\n", mot);
 
 	i=0;
 	while(i<2){
+		printf("\n");
+		printf("chaine a comparer :%s\n", mot );
 		printf("boucle \n");
-		printf("tab titre%s\n", tab[i].titre );
+		printf("tab titre : %s\n", tab[i].titre );
 
-		/*while(tab[i].titre[j] !='\0'){
+		while(tab[i].titre[j] !='\0'){
+			printf("taille_utile\n");
 			//recupere la taille du titre dans le tableau
 			taille_utile++;
 			j++;
-		}*/
-
+		}
+		printf("%d\n", taille_utile );
 		tmp = tab[i].titre;
 
 		printf("tmp %s\n",  tab[i].titre);
@@ -123,12 +126,14 @@ void rechercheFilm(Film tab[], int taille, char *chercheTitre){
 		while(j<taille_utile){
 			//convertis le titre dans le tableau en lowercase
 			tab_cp[j] = tolower(tmp[j]);
-			j++;
+			j++;	
 		}
 		tab_cp[j] = '\0'; //ajout caractere de finde ligne
 			printf("tab : %s\n", tab_cp);
 
-		if(strcmp(tab_cp, mot)){
+		if(strcmp(tab_cp, mot) == 0){
+			int comp = strcmp(tab_cp, mot);
+			printf("%d\n", comp );
 			printf("\n");
 			printf("Compare\n");
 			affichageFilm(&tab[i]);
