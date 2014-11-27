@@ -1,13 +1,6 @@
 #include "personne.h"
 #include "date.h"
 
-/**************************
-*
-*	Derniere MAJ : 10/11
-*		commentaires (.h)
-*
-***************************/
-
 void purger(void){   
 	int c;
 
@@ -60,12 +53,10 @@ void saisirPersonne(Personne *personne){
 	printf("Entrez le nom de la personne : ");
 	fgets(personne->nom, TAILLE, stdin);
 	echange_chariot_espace(personne->nom);
-	//printf("%s\n",personne->nom );
 
 	printf("Entre le prenom de la personne : ");
 	fgets(personne->prenom, TAILLE, stdin);
 	echange_chariot_espace(personne->prenom);
-	//printf("%s\n", personne->prenom );
 
 	printf("Entrez la date de naissance (JJ/M/AAAA)\n");
 	saisirDate(&personne->dob);
@@ -78,7 +69,6 @@ void saisirPersonne(Personne *personne){
 			printf("Est ce un acteur ou un realisateur\n0-Realisateur\n1-Acteur\n");
 			fgets(temp, TAILLE, stdin);
 		}while(verification_digit(temp) == 0 || strlen(temp)>2);
-		//scanf(" %c", &personne->statut);
 		personne->statut = atoi(temp);
 	}while(personne->statut != ACTEUR && personne->statut != REALISATEUR);
 
@@ -123,42 +113,41 @@ char* minuscules(const char *chaine){
 void rechercheNom(Personne tab[], int taille, const char *nom){
 	
 	int i = 0;
+	int cmpt = 0; /*compteur pour savoir si on affiche la liste ou la fiche
+					si cmpt == 1 : fiche
+					sinon : liste
+				   */ 
+	int j =0; /*Si cmpt == 1, il faut une variable d'indice pour garder la case du tableau a afficher*/
 
-	char *chaine_tmp;
-	char *tmp;
+	char *chaine_tmp; //garde en minuscule le nom de recherche
+	char *tmp; //garde en minuscule le nom du tableau realisateur ou acteur
 
 	chaine_tmp = (char*) malloc(TAILLE*sizeof(char));
+	chaine_tmp = minuscules(nom); 
 
-	//printf("chaine : %s longueur : %d\n",nom, strlen(nom) );
+	while(i<taille){
 
-	chaine_tmp = minuscules(nom);
-
-
-	i=0;
-	while(i<5){
-		printf("\n");
-		//printf("chaine a comparer :%s %d\n", chaine_tmp, strlen(chaine_tmp) );
-		printf("boucle \n");
-		//printf("tab longueur nom : %d\n", strlen(tab[i].nom) );
-
-		tmp = minuscules(tab[i].nom);
-
-		//printf("chaine tmp : %s et longueur : %d\n", chaine_tmp, strlen(chaine_tmp));
-
+		tmp = minuscules(tab[i].nom); 
 		echange_chariot_espace(chaine_tmp);
 
-		//printf("tmp %s et longueur : %d\n",  tmp, strlen(tmp));
-			int comp = strcmp(chaine_tmp, tmp);
-			printf("comp : %d\n", comp );
-
 		if(strcmp(chaine_tmp, tmp) == 0){
-			int comp = strcmp(tmp, chaine_tmp);
+
+			printf("%s %s\n", tab[i].prenom, tab[i].nom );
+			cmpt++;
+			j = i;
+
+		/*	int comp = strcmp(tmp, chaine_tmp);
 			printf("comp : %d\n", comp );
 			printf("\n");
 			printf("Compare\n");
-			affichagePersonne(&tab[i]);
+			affichagePersonne(&tab[i]);*/
 		}
-			i++;
+		i++;
+	}
+
+	if (cmpt == 1){
+		printf("dg\n");
+		affichagePersonne(&tab[j]);
 	}
 
 }
@@ -166,42 +155,43 @@ void rechercheNom(Personne tab[], int taille, const char *nom){
 void recherchePrenom(Personne tab[], int taille, const char *nom){
 	
 	int i = 0;
+	int cmpt = 0; /*compteur pour savoir si on affiche la liste ou la fiche
+					si cmpt == 1 : fiche
+					sinon : liste
+				   */ 
+	int j =0; /*Si cmpt == 1, il faut une variable d'indice pour garder la case du tableau a afficher*/
 
-	char *chaine_tmp;
-	char *tmp;
+	char *chaine_tmp; //garde en minuscule le prenom chercher
+	char *tmp; // garde en minusucles les prenom du tableau a chaque appel	
 
 	chaine_tmp = (char*) malloc(TAILLE*sizeof(char));
-
-	//printf("chaine : %s longueur : %d\n",nom, strlen(nom) );
-
 	chaine_tmp = minuscules(nom);
 
-	while(i<3){
-		printf("\n");
-		//printf("chaine a comparer :%s %d\n", chaine_tmp, strlen(chaine_tmp) );
-		printf("boucle \n");
-		//printf("tab longueur nom : %d\n", strlen(tab[i].prenom) );
+	while(i<taille){
 
 		tmp = minuscules(tab[i].prenom);
-
-		//printf("chaine tmp : %s et longueur : %d\n", chaine_tmp, strlen(chaine_tmp));
-
 		echange_chariot_espace(chaine_tmp);
 
-		//printf("tmp %s et longueur : %d\n",  tmp, strlen(tmp));
-			int comp = strcmp(chaine_tmp, tmp);
-			printf("comp : %d\n", comp );
-
 		if(strcmp(chaine_tmp, tmp) == 0){
-			int comp = strcmp(tmp, chaine_tmp);
+
+			printf("%s %s\n", tab[i].prenom, tab[i].nom );
+			cmpt++;
+			j = i;
+			/*int comp = strcmp(tmp, chaine_tmp);
 			printf("comp : %d\n", comp );
 			printf("\n");
-			printf("Compare\n");
-			affichagePersonne(&tab[i]);
+			printf("Compare\n");*/
+			//affichagePersonne(&tab[i]);
 		}
-			i++;
+		i++;
+	}
+	printf("dgdh\n");
+	if (cmpt == 1){
+		printf("dg\n");
+		affichagePersonne(&tab[j]);
 	}
 
+	
 }
 
 void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee){

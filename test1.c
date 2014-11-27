@@ -195,7 +195,7 @@ void choix2(Personne tab[], int taille){
 		**/
 		printf("Quel est le prenom du realisateur que vous cherchez ?\n");
 		
-		fgets(buffer, TAILLE, stdin);
+		fgets(buffer, taille, stdin);
 
 		//rechercheAnnee(tab, TAILLE, year);
 	}
@@ -275,7 +275,7 @@ void choix3(Personne tab[], int taille){
 		clean(critere);
 		printf("Quel est le prenom de l'acteur/actrice que vous cherchez ?\n");
 		fgets(buffer, TAILLE, stdin);
-		recherchePrenom(tab, TAILLE, buffer);
+		recherchePrenom(tab, taille, buffer);
 	}
 
 	/**
