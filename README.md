@@ -3,6 +3,10 @@ C
 
 Projet C L3Efrei
 
+###27 Novembre 
+	personne.c : 
+		Fonction rechercheNom fini niveau affichage une personne
+		
 ###26 Novembre
 
 	main.c :
