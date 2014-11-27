@@ -101,8 +101,6 @@ void affichagePersonne(const Personne *personne){
 }
 
 char* minuscules(const char *chaine){
-	//transformer cette boucle en une fonction
-
 	int i = 0; //compteur pour le tableau temporaire
 	char *mot; //pointeur temporaire qui  garde la version minuscule
 
@@ -120,66 +118,85 @@ char* minuscules(const char *chaine){
 	mot[i] = '\0'; //ajout caractere de fin de ligne
 
 	return mot;
-	//printf("sfdg :%s\n", mot);
 }
 
 void rechercheNom(Personne tab[], int taille, const char *nom){
 	
 	int i = 0;
-	int j = 0;
-	int taille_utile = 0;
 
 	char *chaine_tmp;
-	char tab_cp[TAILLE];
 	char *tmp;
 
 	chaine_tmp = (char*) malloc(TAILLE*sizeof(char));
 
-	printf("chaine : %s\n",nom );
+	printf("chaine : %s longueur : %d\n",nom, strlen(nom) );
 
 	chaine_tmp = minuscules(nom);
 
-	printf("chaine tmp : %s\n", chaine_tmp);
-
-	//transformer cette boucle en une fonction
-	/*while(*nom !='\0'){
-		//convertis en lowercase le titre
-		mot[i] = tolower(*nom);
-		nom++;
-		i++;
-	}
-	mot[i] = '\0'; //ajout caractere de fin del igne
-	printf("chaine : %s\n", mot);*/
 
 	i=0;
-	while(i<2){
+	while(i<3){
 		printf("\n");
-		printf("chaine a comparer :%s\n", chaine_tmp );
+		printf("chaine a comparer :%s %d\n", chaine_tmp, strlen(chaine_tmp) );
 		printf("boucle \n");
-		printf("tab titre : %s\n", tab[i].nom );
+		printf("tab longueur nom : %d\n", strlen(tab[i].nom) );
 
-		while(tab[i].nom[j] !='\0'){
-			printf("taille_utile\n");
-			//recupere la taille du titre dans le tableau
-			taille_utile++;
-			j++;
+		tmp = minuscules(tab[i].nom);
+
+		printf("chaine tmp : %s et longueur : %d\n", chaine_tmp, strlen(chaine_tmp));
+
+		echange_chariot_espace(chaine_tmp);
+
+		printf("tmp %s et longueur : %d\n",  tmp, strlen(tmp));
+			int comp = strcmp(chaine_tmp, tmp);
+			printf("comp : %d\n", comp );
+
+		if(strcmp(chaine_tmp, tmp) == 0){
+			int comp = strcmp(tmp, chaine_tmp);
+			printf("comp : %d\n", comp );
+			printf("\n");
+			printf("Compare\n");
+			affichagePersonne(&tab[i]);
 		}
-		printf("%d\n", taille_utile );
-		tmp = tab[i].nom;
+			i++;
+	}
 
-		printf("tmp %s\n",  tab[i].nom);
-		j=0;
-		while(j<taille_utile){
-			//convertis le titre dans le tableau en lowercase
-			tab_cp[j] = tolower(tmp[j]);
-			j++;	
-		}
-		tab_cp[j] = '\0'; //ajout caractere de finde ligne
-			printf("tab : %s\n", tab_cp);
+}
 
-		if(strcmp(tab_cp, chaine_tmp) == 0){
-			int comp = strcmp(tab_cp, chaine_tmp);
-			printf("%d\n", comp );
+void recherchePrenom(Personne tab[], int taille, const char *nom){
+	
+	int i = 0;
+
+	char *chaine_tmp;
+	char *tmp;
+
+	chaine_tmp = (char*) malloc(TAILLE*sizeof(char));
+
+	printf("chaine : %s longueur : %d\n",nom, strlen(nom) );
+
+	chaine_tmp = minuscules(nom);
+
+
+	i=0;
+	while(i<3){
+		printf("\n");
+		printf("chaine a comparer :%s %d\n", chaine_tmp, strlen(chaine_tmp) );
+		printf("boucle \n");
+		printf("tab longueur nom : %d\n", strlen(tab[i].nom) );
+
+		tmp = minuscules(tab[i].nom);
+
+		printf("chaine tmp : %s et longueur : %d\n", chaine_tmp, strlen(chaine_tmp));
+
+		echange_chariot_espace(chaine_tmp);
+
+		printf("tmp %s et longueur : %d\n",  tmp, strlen(tmp));
+			int comp = strcmp(chaine_tmp, tmp);
+			printf("comp : %d\n", comp );
+
+		if(strcmp(chaine_tmp, tmp) == 0){
+			int comp = strcmp(tmp, chaine_tmp);
+			printf("comp : %d\n", comp );
 			printf("\n");
 			printf("Compare\n");
 			affichagePersonne(&tab[i]);

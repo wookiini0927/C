@@ -86,13 +86,29 @@ char* minuscules(const char *chaine);
  *
  * Paramètre tab : tableau de realisateur ou acteur à parcourir.
  * Paramètre taille : taille du tableau de realisateur ou acteur.
- * Paramètre nom : trouver la fiche de la personne par son nom ou prenom
+ * Paramètre nom : trouver la fiche de la personne par son prenom
  *
  * Affiche : une liste s'il y en a plusieurs,
  *			sinon affiche la fiche direct
  * 			sinon : envoi un message d'erreur et propose de le rajouter dans la BDD
  **/
 void rechercheNom(Personne tab[], int taille, const char *nom);
+
+/**
+ * Recherche dans la BDD des personnes (acteur ou realisateur) 
+ * l'acteur ou relaisateur ayant le nom ou le prenom demande
+ * (affiche toute les possibilites dans nom ET prenom)
+ *
+ * Paramètre tab : tableau de realisateur ou acteur à parcourir.
+ * Paramètre taille : taille du tableau de realisateur ou acteur.
+ * Paramètre prenom : trouver la fiche de la personne par son prenom
+ *
+ * Affiche : une liste s'il y en a plusieurs,
+ *			sinon affiche la fiche direct
+ * 			sinon : envoi un message d'erreur et propose de le rajouter dans la BDD
+ **/
+void recherchePrenom(Personne tab[], int taille, const char *prenom){
+
 
 
 /*convertie le metier de la personne en charactere
