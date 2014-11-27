@@ -10,6 +10,8 @@ Projet C L3Efrei
 		commentaire a jour pour chaque fonction
 	date.c :
 		fonction comparerDate fini
+	test1.c :
+		modification necessaire pour que les fonctions recherche fonctionne
 ###26 Novembre
 
 	main.c :
