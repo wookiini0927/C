@@ -74,6 +74,55 @@ void affichageDate(const Date *d){
 
 }
 
+/* Fonction comparaison de deux dates*/
+int comparaisonDate(const Date *d1, const Date *d2){
+
+    int i = 0; //difference de mois entre les deux dates
+    int j = 0; //difference de jour entre les deux dates
+
+    if (d1->annee > d2->annee){
+        printf("La personne nee en %d est plus jeune que celle nee en %d.\n", d1->annee, d2->annee);
+    }
+    else if (d1->annee < d2->annee){
+        printf("La personne nee en %d est plus agee que celle nee en %d.\n", d1->annee, d2->annee);
+    }
+    else{ //Cas ou a1 == a2
+        if (d1->mois > d2->mois){
+            i = (d1->mois) - (d2->mois);
+            printf("Les deux personnes sont nees la meme annee (%d), mais la premiere est plus jeune que la deuxieme de %d mois.\n", d1->annee, i);
+        }
+        else if (d1->mois < d2->mois){
+            i = (d2->mois) - (d1->mois);
+            printf("Les deux personnes sont nees la meme annee (%d), mais la premiere est plus agee que la deuxieme de %d mois.\n", d1->annee, i);
+        }
+        else{ // Cas ou m1==m2
+            if (d1->jour > d2->jour){
+                j = (d1->jour) - (d2->jour);
+                if (j > 1){
+                    printf("Les deux personnes sont nees le meme mois (%d) de la meme annee (%d), mais la premiere est plus jeune que la deuxieme de %d jours.\n", d1->mois, d1->annee, j);
+                }
+                else{
+                    printf("Les deux personnes sont nees le meme mois (%d) de la meme annee (%d), mais la premiere est plus jeune que la deuxieme d' %d jour seulement.\n", d1->mois, d1->annee, j);
+                }
+            }
+            else if (d1->jour < d2->jour){
+                j = (d2->jour) - (d1->jour);
+                if (j > 1){
+                    printf("Les deux personnes sont nees le meme mois (%d) de la meme annee (%d), mais la premiere est plus agee que la deuxieme de %d jours.\n", d1->mois, d1->annee, j);
+                }
+                else {
+                    printf("Les deux personnes sont nees le meme mois (%d) de la meme annee (%d), mais la premiere est plus agee que la deuxieme d' %d jour seulement.\n", d1->mois, d1->annee, j);
+                }
+            }
+            else{ //Cas ou j1 == j2 
+                printf("les deux personnes sont toutes les deux nees le %d-%d-%d.\n", d1->jour, d1->mois, d1->annee);
+            }
+        }
+    }
+
+    return 0;
+}
+
 void conversionMois(int mois){
 	switch(mois){
 		case 1 : printf("Janvier");
