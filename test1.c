@@ -31,7 +31,7 @@
 *	
 *	Renvoi vers une autre fonction
 */
-void test1_menu(Film tab[], int taille){
+void test1_menu(Film tab[], Personne real[], Personne acteur[], int taille){
 
 	/*Variable locale : choix (type char *), taile 127, reserve en memoire le type d'utilisation*/ 
 	char choix[REPONSE];
@@ -43,15 +43,18 @@ void test1_menu(Film tab[], int taille){
 		printf("|\tC-Acteurs/actrices\t|\n");
 		printf("---------------------------------\n");
 		
-		fgets(choix, CHAR_MAX, stdin);
+		fgets(choix, REPONSE, stdin);
+
 	}while(*choix !='A' && *choix !='a' && *choix !='B' && *choix !='b' && *choix != 'C' && *choix != 'c');
 
 	if (*choix == 'A' || *choix == 'a'){
+		clean(choix);
 		choix1(tab, taille);
 	}
-	else if (*choix == 2){
-		//choix2();
-		;
+	else if (*choix == 'B' || *choix == 'b'){
+		clean(choix);
+		choix2(real, taille);
+		
 	}
 	else if (*choix == 3){
 		//choix3();
@@ -86,15 +89,19 @@ void choix1(Film tab[], int taille){
 	}while(*critere !='A' && *critere !='a' && *critere !='B' && *critere !='b' && *critere != 'C' && *critere != 'c' && *critere != 'D' && *critere !='d' && *critere != 'E' && *critere !='e' && *critere != 'F' && *critere !='f');
 	
 	if (*critere == 'A' || *critere == 'a'){
+
 		/**
 		*Recherche d'un film par son titre
 		*Affiche sa fiche
 		**/
 		printf("Quel est le film que vous cherchez ?\n");
 		fgets(buffer, TAILLE, stdin);
+		echange_chariot_espace(buffer);
 		rechercheFilm(tab, TAILLE, buffer);
+
 	}
 	else if (*critere == 'B' || *critere == 'b'){
+
 		/**
 		*Recherche les films sortie dans l'annee demande
 		*Liste tous les films sortie durant cette annee
@@ -140,14 +147,198 @@ void choix1(Film tab[], int taille){
 		recherche_FilmActeur(tab, TAILLE, buffer);
 	}
 	else if (*critere == 'F' || *critere == 'f'){
-		printf("Quel genre?\n");
-		fgets(buffer, TAILLE, stdin);
-		//rechercheGenre(tab, TAILLE, buffer);
+		choix_genre(tab, taille);
 	}
 
+}
 
+void choix_genre(Film tab[], int taille){
 
+	char buffer[TAILLE];
 
+	printf("--------------Genre--------------\n");
+	printf("|\t-Action\t\t\t|\n");
+	printf("|\t-Horreur\t\t|\n");
+	printf("|\t-Comedie\t\t|\n");
+	printf("|\t-Docuementaire\t\t|\n");
+	printf("|\t-Policier\t\t|\n");
+	printf("|\t-Drame\t\t\t|\n");
+	printf("|\t-Animation\t\t|\n");
+	printf("|\t-Science-Fiction\t|\n");
+	printf("---------------------------------\n");
+
+	printf("Quel genre?\n");
+	fgets(buffer, TAILLE, stdin);
+	//rechercheGenre(tab, TAILLE, buffer);
+
+}
+
+/*
+*	Choix de recherche
+*
+*	Renvoi a la fonction de recherche dans le fichier personne si c'est un realisateur
+*/
+void choix2(Personne tab[], int taille){
+
+	char critere[REPONSE];
+	char buffer[TAILLE];
+	int duree;
+
+	do{
+		printf("--------Type de recherche--------\n");
+		printf("|\tA-Nom\t\t\t|\n");
+		printf("|\tB-Prenom\t\t|\n");
+		printf("|\tC-Date de naissance\t|\n");
+		printf("|\tD-Nationalite\t\t|\n");
+		printf("---------------------------------\n");
+
+		fgets(critere, REPONSE, stdin);
+	}while(*critere !='A' && *critere !='a' && *critere !='B' && *critere !='b' && *critere != 'C' && *critere != 'c' && *critere != 'D' && *critere !='d' && *critere != 'E' && *critere !='e' && *critere != 'F' && *critere !='f');
+	
+	if (*critere == 'A' || *critere == 'a'){
+		
+		/**
+		*Recherche d'un realisateur par son nom
+		*Affiche sa fiche
+		**/
+		clean(critere);
+		printf("Quel est le nom du realisateur que vous cherchez ?\n");
+		fgets(buffer, TAILLE, stdin);
+		rechercheNom(tab, 34, buffer);
+	}
+	else if (*critere == 'B' || *critere == 'b'){
+
+		/**
+		*Recherche les films sortie dans l'annee demande
+		*Liste tous les films sortie durant cette annee
+		**/
+		printf("Quel est le prenom du realisateur que vous cherchez ?\n");
+		
+		fgets(buffer, TAILLE, stdin);
+
+		//rechercheAnnee(tab, TAILLE, year);
+	}
+
+	/**
+	* 
+	* La recherche des dates
+	* a reflechir
+	*
+	**/
+	else if (*critere == 'C' || *critere == 'c'){
+		printf("Duree de film maximum (en min)?\n");
+		do{
+			fgets(buffer, TAILLE, stdin);
+
+			if(verification_digit(buffer)){
+				duree = atoi(buffer);
+			}
+		}while(verification_digit(buffer) == 0);
+		//rechercheDuree(tab, TAILLE, duree);
+	}
+
+	/**
+	* Pour la rechercher acteur/realisateur
+	* on ne fera pas la difference prenom/nom
+	* on cherchera dans les deux criteres
+	*
+	* ou distinguer prenom et nom a en discuter
+	**/
+	else if (*critere == 'D' || *critere == 'd'){
+		printf("Quel est le nom ou le prenom du realisateur?\n");
+		fgets(buffer, TAILLE, stdin);
+		//recherche_FilmRealisateur(tab, TAILLE, buffer);
+	}
+	else if (*critere == 'E' || *critere == 'e'){
+		printf("Quel est le nom ou le prenom de l'acteur/actrice?\n");
+		fgets(buffer, TAILLE, stdin);
+		//recherche_FilmActeur(tab, TAILLE, buffer);
+	}
+	
+}
+
+/*
+*	Choix de recherche
+*
+*	Renvoi a la fonction de recherche dans le fichier personne si c'est un realisateur
+*/
+void choix3(Personne tab[], int taille){
+
+	char critere[REPONSE];
+	char buffer[TAILLE];
+	int duree;
+
+	do{
+		printf("--------Type de recherche--------\n");
+		printf("|\tA-Nom\t\t\t|\n");
+		printf("|\tB-Prenom\t\t|\n");
+		printf("|\tC-Date de naissance\t|\n");
+		printf("|\tD-Nationalite\t\t|\n");
+		printf("---------------------------------\n");
+
+		fgets(critere, REPONSE, stdin);
+	}while(*critere !='A' && *critere !='a' && *critere !='B' && *critere !='b' && *critere != 'C' && *critere != 'c' && *critere != 'D' && *critere !='d' && *critere != 'E' && *critere !='e' && *critere != 'F' && *critere !='f');
+	
+	if (*critere == 'A' || *critere == 'a'){
+		
+		/**
+		*Recherche d'un realisateur par son nom
+		*Affiche sa fiche
+		**/
+		clean(critere);
+		printf("Quel est le nom du realisateur que vous cherchez ?\n");
+		fgets(buffer, TAILLE, stdin);
+		rechercheNom(tab, 34, buffer);
+	}
+	else if (*critere == 'B' || *critere == 'b'){
+
+		/**
+		*Recherche les films sortie dans l'annee demande
+		*Liste tous les films sortie durant cette annee
+		**/
+		printf("Quel est le prenom du realisateur que vous cherchez ?\n");
+		
+		fgets(buffer, TAILLE, stdin);
+
+		//rechercheAnnee(tab, TAILLE, year);
+	}
+
+	/**
+	* 
+	* La recherche des dates
+	* a reflechir
+	*
+	**/
+	else if (*critere == 'C' || *critere == 'c'){
+		printf("Duree de film maximum (en min)?\n");
+		do{
+			fgets(buffer, TAILLE, stdin);
+
+			if(verification_digit(buffer)){
+				duree = atoi(buffer);
+			}
+		}while(verification_digit(buffer) == 0);
+		//rechercheDuree(tab, TAILLE, duree);
+	}
+
+	/**
+	* Pour la recherche acteur/realisateur
+	* on ne fera pas la difference prenom/nom
+	* on cherchera dans les deux criteres
+	*
+	* ou distinguer prenom et nom a en discuter
+	**/
+	else if (*critere == 'D' || *critere == 'd'){
+		printf("Quel est le nom ou le prenom du realisateur?\n");
+		fgets(buffer, TAILLE, stdin);
+		//recherche_FilmRealisateur(tab, TAILLE, buffer);
+	}
+	else if (*critere == 'E' || *critere == 'e'){
+		printf("Quel est le nom ou le prenom de l'acteur/actrice?\n");
+		fgets(buffer, TAILLE, stdin);
+		//recherche_FilmActeur(tab, TAILLE, buffer);
+	}
+	
 }
 
 /*int main(){
