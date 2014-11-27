@@ -129,25 +129,25 @@ void rechercheNom(Personne tab[], int taille, const char *nom){
 
 	chaine_tmp = (char*) malloc(TAILLE*sizeof(char));
 
-	printf("chaine : %s longueur : %d\n",nom, strlen(nom) );
+	//printf("chaine : %s longueur : %d\n",nom, strlen(nom) );
 
 	chaine_tmp = minuscules(nom);
 
 
 	i=0;
-	while(i<3){
+	while(i<5){
 		printf("\n");
-		printf("chaine a comparer :%s %d\n", chaine_tmp, strlen(chaine_tmp) );
+		//printf("chaine a comparer :%s %d\n", chaine_tmp, strlen(chaine_tmp) );
 		printf("boucle \n");
-		printf("tab longueur nom : %d\n", strlen(tab[i].nom) );
+		//printf("tab longueur nom : %d\n", strlen(tab[i].nom) );
 
 		tmp = minuscules(tab[i].nom);
 
-		printf("chaine tmp : %s et longueur : %d\n", chaine_tmp, strlen(chaine_tmp));
+		//printf("chaine tmp : %s et longueur : %d\n", chaine_tmp, strlen(chaine_tmp));
 
 		echange_chariot_espace(chaine_tmp);
 
-		printf("tmp %s et longueur : %d\n",  tmp, strlen(tmp));
+		//printf("tmp %s et longueur : %d\n",  tmp, strlen(tmp));
 			int comp = strcmp(chaine_tmp, tmp);
 			printf("comp : %d\n", comp );
 
@@ -172,25 +172,23 @@ void recherchePrenom(Personne tab[], int taille, const char *nom){
 
 	chaine_tmp = (char*) malloc(TAILLE*sizeof(char));
 
-	printf("chaine : %s longueur : %d\n",nom, strlen(nom) );
+	//printf("chaine : %s longueur : %d\n",nom, strlen(nom) );
 
 	chaine_tmp = minuscules(nom);
 
-
-	i=0;
 	while(i<3){
 		printf("\n");
-		printf("chaine a comparer :%s %d\n", chaine_tmp, strlen(chaine_tmp) );
+		//printf("chaine a comparer :%s %d\n", chaine_tmp, strlen(chaine_tmp) );
 		printf("boucle \n");
-		printf("tab longueur nom : %d\n", strlen(tab[i].nom) );
+		//printf("tab longueur nom : %d\n", strlen(tab[i].prenom) );
 
-		tmp = minuscules(tab[i].nom);
+		tmp = minuscules(tab[i].prenom);
 
-		printf("chaine tmp : %s et longueur : %d\n", chaine_tmp, strlen(chaine_tmp));
+		//printf("chaine tmp : %s et longueur : %d\n", chaine_tmp, strlen(chaine_tmp));
 
 		echange_chariot_espace(chaine_tmp);
 
-		printf("tmp %s et longueur : %d\n",  tmp, strlen(tmp));
+		//printf("tmp %s et longueur : %d\n",  tmp, strlen(tmp));
 			int comp = strcmp(chaine_tmp, tmp);
 			printf("comp : %d\n", comp );
 
@@ -206,7 +204,52 @@ void recherchePrenom(Personne tab[], int taille, const char *nom){
 
 }
 
+void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee){
+	int i = 0;
 
+	printf("cherche annee : %d\n", chercheAnnee );
+
+	while(i<6){
+		printf("\n");
+		printf("boucle \n");
+		printf("tab annee %d\n", tab[i].dob.annee );
+
+		if(tab[i].dob.annee == chercheAnnee){
+
+			printf("tab annee %d\n", tab[i].dob.annee );
+			printf("\n");
+			printf("Compare\n");
+			
+			printf("%s %s (%d)\n", tab[i].prenom, tab[i].nom, tab[i].dob.annee );
+		}
+		i++;
+	}
+}
+
+void rechercheNationalite(Personne tab[], int taille, const char *nationality){
+	
+	int i = 0;
+
+	char *chaine_tmp;
+	char *tmp;
+	chaine_tmp = (char*) malloc(TAILLE*sizeof(char));
+
+	chaine_tmp = minuscules(nationality);
+
+	while(i<3){
+		printf("\n");
+		printf("boucle \n");
+		tmp = minuscules(tab[i].nationalite);
+
+		echange_chariot_espace(chaine_tmp);
+
+		if(strcmp(chaine_tmp, tmp) == 0){
+			printf("%s %s (%s)\n", tab[i].prenom, tab[i].nom, tab[i].nationalite );
+		}
+		i++;
+	}
+
+}
 void conversionMetier(Metier statut){
 	switch(statut){
 		case 0 : printf("REALISATEUR\n");

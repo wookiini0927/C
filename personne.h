@@ -118,7 +118,20 @@ void recherchePrenom(Personne tab[], int taille, const char *prenom);
  * Affiche : une liste
  *			
  **/
-void rechercheAnnee(Personne tab[], int taille, int chercheAnnee); 
+void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee); 
+
+/**
+ * Recherche dans la BDD des personnes (acteur ou realisateur) 
+ * les acteurs ou relaisateurs de la nationalite voulu
+ *
+ * Paramètre tab : tableau de realisateur ou acteur à parcourir.
+ * Paramètre taille : taille du tableau de realisateur ou acteur.
+ * Paramètre prenom : trouver la fiche de la personne par son prenom
+ *
+ * Affiche : une liste
+ *			
+ **/
+void rechercheNationalite(Personne tab[], int taille, const char *nationality); 
 
 /*convertie le metier de la personne en charactere
 *
