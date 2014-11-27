@@ -71,7 +71,6 @@ void saisirPersonne(Personne *personne){
 		}while(verification_digit(temp) == 0 || strlen(temp)>2);
 		personne->statut = atoi(temp);
 	}while(personne->statut != ACTEUR && personne->statut != REALISATEUR);
-
 }
 
 void affichagePersonne(const Personne *personne){
@@ -131,25 +130,16 @@ void rechercheNom(Personne tab[], int taille, const char *nom){
 		echange_chariot_espace(chaine_tmp);
 
 		if(strcmp(chaine_tmp, tmp) == 0){
-
 			printf("%s %s\n", tab[i].prenom, tab[i].nom );
 			cmpt++;
 			j = i;
-
-		/*	int comp = strcmp(tmp, chaine_tmp);
-			printf("comp : %d\n", comp );
-			printf("\n");
-			printf("Compare\n");
-			affichagePersonne(&tab[i]);*/
 		}
 		i++;
 	}
 
 	if (cmpt == 1){
-		printf("dg\n");
 		affichagePersonne(&tab[j]);
 	}
-
 }
 
 void recherchePrenom(Personne tab[], int taille, const char *nom){
@@ -173,25 +163,17 @@ void recherchePrenom(Personne tab[], int taille, const char *nom){
 		echange_chariot_espace(chaine_tmp);
 
 		if(strcmp(chaine_tmp, tmp) == 0){
-
 			printf("%s %s\n", tab[i].prenom, tab[i].nom );
 			cmpt++;
 			j = i;
-			/*int comp = strcmp(tmp, chaine_tmp);
-			printf("comp : %d\n", comp );
-			printf("\n");
-			printf("Compare\n");*/
-			//affichagePersonne(&tab[i]);
 		}
+
 		i++;
 	}
-	printf("dgdh\n");
-	if (cmpt == 1){
-		printf("dg\n");
-		affichagePersonne(&tab[j]);
-	}
 
-	
+	if (cmpt == 1){
+		affichagePersonne(&tab[j]);
+	}	
 }
 
 void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee){
@@ -224,8 +206,8 @@ void rechercheNationalite(Personne tab[], int taille, const char *nationality){
 		}
 		i++;
 	}
-
 }
+
 void conversionMetier(Metier statut){
 	switch(statut){
 		case 0 : printf("REALISATEUR\n");
@@ -236,6 +218,5 @@ void conversionMetier(Metier statut){
 			printf("AUCUN\n");
 			break;
 	}
-
 }
 
