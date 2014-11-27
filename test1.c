@@ -56,9 +56,10 @@ void test1_menu(Film tab[], Personne real[], Personne acteur[], int taille){
 		choix2(real, taille);
 		
 	}
-	else if (*choix == 3){
-		//choix3();
-		;
+	else if (*choix == 'C' || *choix == 'c'){
+		clean(choix);
+		choix3(acteur, taille);
+		
 	}
 	
 }
@@ -286,7 +287,7 @@ void choix3(Personne tab[], int taille){
 		*Affiche sa fiche
 		**/
 		clean(critere);
-		printf("Quel est le nom du realisateur que vous cherchez ?\n");
+		printf("Quel est le nom de l'acteur/actrice que vous cherchez ?\n");
 		fgets(buffer, TAILLE, stdin);
 		rechercheNom(tab, 34, buffer);
 	}
@@ -296,7 +297,7 @@ void choix3(Personne tab[], int taille){
 		*Recherche les films sortie dans l'annee demande
 		*Liste tous les films sortie durant cette annee
 		**/
-		printf("Quel est le prenom du realisateur que vous cherchez ?\n");
+		printf("Quel est le prenom de l'acteur/actrice que vous cherchez ?\n");
 		
 		fgets(buffer, TAILLE, stdin);
 
