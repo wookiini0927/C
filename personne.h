@@ -31,14 +31,15 @@ FONCTIONS
 *******************************/
 
 /**
-* Fonction purger et clean arevoir si l'utilisation est utile ou pas
+* Fonction qui nettoie le buffer lors des fgets pour eviter tout conflit
 *
+* @src : openclassroom
 **/
 void purger();
 void clean(char *chaine);
 
 /**
-* Enleve le retour chariot et le remplace par l'espace de la chaine
+* Enleve le retour chariot et le remplace par l'espace dans la chaine
 * Ameliore l'affichage
 *
 * Parametre chaine : chaine de caractere sur lequel on doit enlever le retour à la ligne
@@ -77,6 +78,15 @@ void saisirPersonne(Personne *personne);
  **/
 void affichagePersonne(const Personne *personne);
 
+/**
+*
+* Change la chaine de caractere en minuscules
+* Fonction pour pouvoir par la suite comparer sans sensitive case deux chaines
+*
+* Param chaine : chaine de caractere que l'on veut avoir en minuscule
+*
+* Retourne cette chaine en minuscule
+**/
 char* minuscules(const char *chaine);
 
 /**
@@ -115,7 +125,7 @@ void recherchePrenom(Personne tab[], int taille, const char *prenom);
  * Paramètre taille : taille du tableau de realisateur ou acteur.
  * Paramètre prenom : trouver la fiche de la personne par son prenom
  *
- * Affiche : une liste
+ * Affiche : une liste d'acteur ou realisateur nee dans l'annee demande
  *			
  **/
 void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee); 
@@ -128,7 +138,7 @@ void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee);
  * Paramètre taille : taille du tableau de realisateur ou acteur.
  * Paramètre prenom : trouver la fiche de la personne par son prenom
  *
- * Affiche : une liste
+ * Affiche : une liste d'acteur ou realisateur de la nationalite voulu
  *			
  **/
 void rechercheNationalite(Personne tab[], int taille, const char *nationality); 
