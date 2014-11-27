@@ -90,7 +90,6 @@ void choix1(Film tab[], int taille){
 		printf("Quel est l'annee que vous cherchez ?\n");
 		do{
 			fgets(buffer, TAILLE, stdin);
-
 			if(verification_digit(buffer)){
 				year = atoi(buffer);
 			}
@@ -201,11 +200,7 @@ void choix2(Personne tab[], int taille){
 		recherchePrenom(tab, taille, buffer);
 	}
 
-	/**
-	* 
-	* Recherche l'année de naissance du relalisateur/acteur
-	*
-	**/
+	/** Recherche l'année de naissance du relalisateur/acteur **/
 	else if (*critere == 'C' || *critere == 'c'){
 		printf("Quelle est l'annee recherchee?\n");
 		do{
@@ -255,7 +250,8 @@ void choix3(Personne tab[], int taille){
 		
 		/**
 		*Recherche d'un realisateur par son nom
-		*Affiche sa fiche
+		*Affiche sa fiche s'il y en a qu'un
+		*sinon une liste
 		**/
 		clean(critere);
 		printf("Quel est le nom de l'acteur/actrice que vous cherchez ?\n");
@@ -266,7 +262,8 @@ void choix3(Personne tab[], int taille){
 
 		/**
 		*Recherche d'un realisateur par son prenom
-		*Affiche sa fiche
+		*Affiche sa fiche s'il y en a qu'un
+		*sinon une liste
 		**/
 		clean(critere);
 		printf("Quel est le prenom de l'acteur/actrice que vous cherchez ?\n");
@@ -274,11 +271,7 @@ void choix3(Personne tab[], int taille){
 		recherchePrenom(tab, taille, buffer);
 	}
 
-	/**
-	* 
-	* Recherche l'année de naissance du relalisateur/acteur
-	*
-	**/
+	/** Recherche l'année de naissance du relalisateur/acteur **/
 	else if (*critere == 'C' || *critere == 'c'){
 		printf("Quelle est l'annee de naissance recherchee?\n");
 		do{
@@ -291,9 +284,7 @@ void choix3(Personne tab[], int taille){
 		recherche_naissance_Annee(tab, taille, year);
 	}
 
-	/**
-	* Recherche par rapport a la nationalite de l'acteur
-	**/
+	/** Recherche par rapport a la nationalite de l'acteur **/
 	else if (*critere == 'D' || *critere == 'd'){
 		clean(critere);
 		printf("Quel est la nationalite?\n");
