@@ -197,19 +197,8 @@ void recherchePrenom(Personne tab[], int taille, const char *nom){
 void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee){
 	int i = 0;
 
-	printf("cherche annee : %d\n", chercheAnnee );
-
-	while(i<6){
-		printf("\n");
-		printf("boucle \n");
-		printf("tab annee %d\n", tab[i].dob.annee );
-
+	while(i<taille){
 		if(tab[i].dob.annee == chercheAnnee){
-
-			printf("tab annee %d\n", tab[i].dob.annee );
-			printf("\n");
-			printf("Compare\n");
-			
 			printf("%s %s (%d)\n", tab[i].prenom, tab[i].nom, tab[i].dob.annee );
 		}
 		i++;
@@ -226,11 +215,8 @@ void rechercheNationalite(Personne tab[], int taille, const char *nationality){
 
 	chaine_tmp = minuscules(nationality);
 
-	while(i<3){
-		printf("\n");
-		printf("boucle \n");
+	while(i<taille){
 		tmp = minuscules(tab[i].nationalite);
-
 		echange_chariot_espace(chaine_tmp);
 
 		if(strcmp(chaine_tmp, tmp) == 0){

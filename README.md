@@ -5,8 +5,11 @@ Projet C L3Efrei
 
 ###27 Novembre 
 	personne.c : 
-		Fonction rechercheNom fini niveau affichage une personne
-		
+		Toute les fonctions de recherche (test correct sur realisateur et acteur)
+	personne.h :
+		commentaire a jour pour chaque fonction
+	date.c :
+		fonction comparerDate fini
 ###26 Novembre
 
 	main.c :
