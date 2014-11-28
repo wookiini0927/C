@@ -2,6 +2,31 @@ C
 =
 
 Projet C L3Efrei
+=
+##A faire
+	personne.h :
+		faire un enum pour les nationalites
+	test1.c :
+		verification mauvaise saisie de genre
+
+	General :
+		regler les mauvaise saisie soit rappeler la fonction precedente soit rappeler le tout debut
+=
+###28 Novembre 
+	film.c : 
+		rechercheTitre fini (+test/error)
+		rechercheAnnee fini (+test/error)
+		rechercheDuree fini (+test/error)
+		recherche_FilmRealisateur fini (+test/error)
+		recherche_FilmActeur fini (+test+error)
+		saisirFilm fini (+test)
+		init_tab_film fini (ajout param g2)
+	film.h :
+		struct : genre[2]
+	personne.c :
+		Toutes les fonctions de recherche envoi un message d'erreur dans le cas ou il ne trouve rien
+
+	
 
 ###27 Novembre 
 	personne.c : 
