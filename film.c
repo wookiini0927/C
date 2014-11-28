@@ -26,11 +26,11 @@ void init_tableau_film(Film *f, const char *titre, const int date, Personne *rea
 
 void saisirFilm(Film *film){
 
-	int taille_utile=0;
 	int i=0;
-	int arret = 1; /*continue sinon 0 et stop*/
-	int genre_value;
-	char rep[REPONSE];
+	int arret = 1; /* continue la saisie des acteurs
+					* si 0 stop*/
+	int genre_value; //variable temporaire pour le genre
+	char rep[REPONSE]; //variable pour savoir si on ajoute ou pas un nouvel acteur
 	char temp[TAILLE]; //variable temporaire pour avoir l'annee
 
 	printf("Entrez le titre :\n");
@@ -52,24 +52,24 @@ void saisirFilm(Film *film){
 	do{
 		printf("Information Casting\n");
 		saisirPersonne(&film->casting[i]);
-		
-		if(i >= 0){
+		i++;
+
+		if(i<T_C){
 			do{
 				printf("Voulez vous rentrez un(e) autre acteur/actrice (o/n) ?\n");
-				fgets(rep, sizeof(rep), stdin);			
-				if(rep[0] == 'o' || rep[0] == 'O'){
-					arret = 1;
-					clean(rep);
-				}
-				else if (rep[0] == 'n' || rep[0] == 'N'){
-					arret = 0;
-				}
+				fgets(rep, sizeof(rep), stdin);		
+
+					if(rep[0] == 'o' || rep[0] == 'O'){
+						arret = 1;
+						clean(rep);
+					}
+					else if (rep[0] == 'n' || rep[0] == 'N'){
+						arret = 0;
+					}
 
 			}while(rep[0] == 'o' && rep[0] == 'O' && rep[0] == 'n' && rep[0] == 'N');
-
 		}
-		taille_utile++;
-		i++;
+		
 	}while (i<T_C && arret == 1);
 
 	do{
@@ -91,7 +91,7 @@ void saisirFilm(Film *film){
 		}while(verification_digit(temp) == 0);
 
 		genre_value = atoi(temp);
-		film->genre[i] = (Genre) genre_value;
+		film->genre[i] = (Genre) genre_value; //cast l'entier en type enum genre
 		i++;
 	}while(i<2);
 }
@@ -178,7 +178,7 @@ void rechercheAnnee(Film tab[], int taille, int chercheAnnee){
 	}
 
 	if(cmpt == 0){
-		printf("ERROR : no FILM out %d\n", chercheAnnee);
+		printf("ERROR : no FILM out on %d\n", chercheAnnee);
 	}
 }
 
@@ -285,9 +285,12 @@ void recherche_FilmActeur(Film tab[], int taille, const char *name){
 	chaine_res = majuscules(name);
 	echange_chariot_espace(chaine_res);
 
-	do{
+	/**
+	* Boucle qui permet de recuperer le prenom de l'acteur rechercher
+	**/
+	do{ //Premier while pour parcourir tout le tableau
 		k=0;
-		do{
+		do{ //Deuxieme boucle pour les 4 cases du casting
 			tmp = minuscules(tab[i].casting[k].nom); 
 			echange_chariot_espace(chaine_tmp);
 
@@ -310,7 +313,7 @@ void recherche_FilmActeur(Film tab[], int taille, const char *name){
 
 	i=0;
 	cmpt = 0;
-	while(i<taille){
+	while(i<taille){ //boucle de recherche
 		k=0;
 		while(k<T_C){
 
@@ -330,7 +333,37 @@ void recherche_FilmActeur(Film tab[], int taille, const char *name){
 		printf("ERROR : no FILM played by : %s\n", chaine_res);
 	}
 }
-/*void rechercheGenre(Film tab[], int taille, Genre genre);*/
+
+void rechercheGenre(Film tab[], int taille, Genre genre){
+	int i = 0; //compteur du tableau film
+	int k = 0; //compteur du tableau genre
+	int cmpt = 0; /*compteur pour savoir si on affiche la liste ou la fiche
+					si cmpt == 1 : fiche
+					si cmpt == 0 : message erreur
+				   */	
+	conversionGenre(genre);
+	printf("\n");			
+	/**
+	* boucle de recherche de genre
+	**/
+	while(i<taille){ //boucle qui parcours tout le tableau
+		k=0;
+		while(k<2){ //boucle qui parcours le tableau genre
+			if(tab[i].genre[k] == genre){
+				cmpt++;
+				printf("%s (%d)\n", tab[i].titre, tab[i].annee);
+			}
+			k++;
+		}
+		i++;
+	}
+
+	if(cmpt == 0){
+		printf("ERROR : no ");
+		conversionGenre(genre); 
+		printf(" FILM in the BDD\n");
+	}	
+}
 
 void conversionDuree(const Film *film){
 

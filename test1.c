@@ -85,16 +85,14 @@ void choix1(Film tab[], int taille){
 	else if (*critere == 'B' || *critere == 'b'){
 
 		/**
-		*Recherche les films sortie dans l'annee demande
-		*Liste tous les films sortie durant cette annee
+		* Recherche les films sortie dans l'annee demande
+		* Liste tous les films sortie durant cette annee
 		**/
 		printf("Quel est l'annee que vous cherchez ?\n");
 		do{
 			fgets(buffer, TAILLE, stdin);
-			if(verification_digit(buffer)){
-				year = atoi(buffer);
-			}
 		}while(verification_digit(buffer) == 0);
+		year = atoi(buffer);
 
 		rechercheAnnee(tab, taille, year);
 	}
@@ -102,11 +100,9 @@ void choix1(Film tab[], int taille){
 		printf("Duree de film (en min)?\nNote le resultat sera plus ou moins a 10min pres\n");
 		do{
 			fgets(buffer, TAILLE, stdin);
-
-			if(verification_digit(buffer)){
-				duree = atoi(buffer);
-			}
 		}while(verification_digit(buffer) == 0);
+		duree = atoi(buffer);
+
 		rechercheDuree(tab, taille, duree);
 	}
 
@@ -138,21 +134,29 @@ void choix1(Film tab[], int taille){
 void choix_genre(Film tab[], int taille){
 
 	char buffer[TAILLE];
+	int tmp;
+	Genre g;
 
 	printf("--------------Genre--------------\n");
-	printf("|\t-Action\t\t\t|\n");
-	printf("|\t-Horreur\t\t|\n");
-	printf("|\t-Comedie\t\t|\n");
-	printf("|\t-Docuementaire\t\t|\n");
-	printf("|\t-Policier\t\t|\n");
-	printf("|\t-Drame\t\t\t|\n");
-	printf("|\t-Animation\t\t|\n");
-	printf("|\t-Science-Fiction\t|\n");
+	printf("|\t0-Acuun\t\t\t|\n");
+	printf("|\t1-Action\t\t|\n");
+	printf("|\t2-Horreur\t\t|\n");
+	printf("|\t3-Comedie\t\t|\n");
+	printf("|\t4-Docuementaire\t\t|\n");
+	printf("|\t5-Policier\t\t|\n");
+	printf("|\t6-Drame\t\t\t|\n");
+	printf("|\t7-Animation\t\t|\n");
+	printf("|\t8-Science-Fiction\t|\n");
 	printf("---------------------------------\n");
 
 	printf("Quel genre?\n");
-	fgets(buffer, TAILLE, stdin);
-	//rechercheGenre(tab, TAILLE, buffer);
+
+	do{
+		fgets(buffer, TAILLE, stdin);
+	}while(verification_digit(buffer) == 0);
+		tmp = atoi(buffer);
+		g = (Genre) tmp;
+	rechercheGenre(tab, taille, g);
 
 }
 

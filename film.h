@@ -123,7 +123,7 @@ void rechercheDuree(Film tab[], int taille, int critDur);
  * Affiche : la liste des film qui dure moins que la duree demande
  * sinon : envoi un message d'erreur
  **/
-void rechercheGenre(Film tab[], int taille, const char* genre);
+void rechercheGenre(Film tab[], int taille, Genre genre);
 
 /**
  * Recherche dans la BDD des films,
@@ -149,7 +149,6 @@ void recherche_FilmRealisateur(Film tab[], int taille, const char *name);
  * Affiche : la liste des film dans lequel joue l'acteur/actrice
  * sinon : envoi un message d'erreur
  **/
-
 void recherche_FilmActeur(Film tab[], int taille, const char *name);
 
 /**
