@@ -16,7 +16,7 @@ DEFINITION D'UN FILM et GENRE
 #define T_C 4
 
 
-typedef enum genre{
+typedef enum Genre{
 	AUCUN,
 	ACTION,
 	HORREUR,
@@ -34,7 +34,7 @@ typedef struct Film{
 	Personne realisateur;
 	Personne casting[T_C];
 	int duree;
-	Genre genre;
+	Genre genre[2];
 }Film;
 
 /******************************
@@ -57,7 +57,7 @@ FONCTIONS
 * Param a4 : acteur 4
 *
 **/
-void init_tableau_film(Film *f, const char *titre, const int date, Personne *real, const int duree, const Genre genre, Personne *a1, Personne *a2, Personne *a3, Personne *a4);
+void init_tableau_film(Film *f, const char *titre, const int date, Personne *real, const int duree, const Genre g1, const Genre g2, Personne *a1, Personne *a2, Personne *a3, Personne *a4);
 
 /**
  * Saisie manuelle des films dans la BDD
@@ -152,22 +152,19 @@ void recherche_FilmRealisateur(Film tab[], int taille, const char *name);
 
 void recherche_FilmActeur(Film tab[], int taille, const char *name);
 
-
-
-/*convertie la duree rentree en minutes en heures et minutes
-*	@param : film de type Film
-*	parametre sur lequel on va recuperer la duree pour pouvoir convertir
-*/
+/**
+* convertie la duree rentree en minutes en heures et minutes
+* Param film :  type Film
+**/
 void conversionDuree(const Film *film);
 
-/*convertie le genre du film en charactere
+/**
+* convertie le genre du film en charactere
 *
 * Parametre genre : genre du film à convertir
 *
-* Affiche : le genre en chaine de caractere*/
+* Affiche : le genre en chaine de caractere
+**/
 void conversionGenre(Genre genre);
-
-
-
 
 #endif

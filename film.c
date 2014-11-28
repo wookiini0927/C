@@ -8,13 +8,14 @@
 *
 ***************************/
 
-void init_tableau_film(Film *f, const char *titre, const int date, Personne *real, const int duree, const Genre genre, Personne *a1, Personne *a2, Personne *a3, Personne *a4)
+void init_tableau_film(Film *f, const char *titre, const int date, Personne *real, const int duree, const Genre g1,const Genre g2, Personne *a1, Personne *a2, Personne *a3, Personne *a4)
 {
 	strcpy(f->titre, titre);
 	f->annee = date;
 	f->realisateur = *real;
 	f->duree = duree;
-	f->genre = genre;
+	f->genre[0] = g1;
+	f->genre[1] = g2;
 
 	f->casting[0] = *a1;
 	f->casting[1] = *a2;
@@ -28,11 +29,13 @@ void saisirFilm(Film *film){
 	int taille_utile=0;
 	int i=0;
 	int arret = 1; /*continue sinon 0 et stop*/
+	int genre_value;
 	char rep[REPONSE];
 	char temp[TAILLE]; //variable temporaire pour avoir l'annee
 
 	printf("Entrez le titre :\n");
 	fgets(film->titre, TAILLE, stdin);
+	echange_chariot_espace(film->titre);
 
 	do{
 		printf("Annee de sortie :\n");
@@ -56,6 +59,7 @@ void saisirFilm(Film *film){
 				fgets(rep, sizeof(rep), stdin);			
 				if(rep[0] == 'o' || rep[0] == 'O'){
 					arret = 1;
+					clean(rep);
 				}
 				else if (rep[0] == 'n' || rep[0] == 'N'){
 					arret = 0;
@@ -68,14 +72,28 @@ void saisirFilm(Film *film){
 		i++;
 	}while (i<T_C && arret == 1);
 
+	do{
+		printf("Durée en minutes\n");
+		fgets(temp, sizeof(temp),stdin );
 
-	printf("Durée en minutes\n");
-	scanf("%d",&film->duree);
+	}while(verification_digit(temp) ==0);
+	film->duree = atoi(temp);
+	clean(temp);
+	printf("%d\n", film->duree );
 
-	printf("Genre du film (choisir le chiffre): \n0-AUCUN\n1-ACTION\n2-HORREUR\n3-COMEDIE\n4-DOCUMENTAIRE\n5-POLICIER\n");
-	printf("6-DRAME\n7-ANIMATION\n8-SCIENCE_FICTION\n");
-	scanf("%d", &film->genre);
+	i=0;
+	do{
+		do{
+			printf("Genre du film (choisir le chiffre): \n0-AUCUN\n1-ACTION\n2-HORREUR\n3-COMEDIE\n4-DOCUMENTAIRE\n5-POLICIER\n");
+			printf("6-DRAME\n7-ANIMATION\n8-SCIENCE_FICTION\n");
+			fgets(temp, sizeof(temp),stdin);
 
+		}while(verification_digit(temp) == 0);
+
+		genre_value = atoi(temp);
+		film->genre[i] = (Genre) genre_value;
+		i++;
+	}while(i<2);
 }
 
 void affichageFilm(const Film *film){
@@ -85,7 +103,11 @@ void affichageFilm(const Film *film){
 	printf("Realisateur : %s %s\n", film->realisateur.prenom, film->realisateur.nom );
 	printf("Acteurs principaux : ");
 	for (i = 0; i< sizeof(film->casting)/sizeof(film->casting[0]); i++){
-		printf("%s %s, ", film->casting[i].prenom, film->casting[i].nom );
+		printf("%s %s", film->casting[i].prenom, film->casting[i].nom );
+		if(i<3){
+			printf(", ");
+		}
+
 		if(i==1){
 			printf("\n");
 		}
@@ -94,7 +116,17 @@ void affichageFilm(const Film *film){
 	printf("Durée : ");
 	conversionDuree(film);
 	printf("Genre : ");
-	conversionGenre(film->genre);
+	for (i = 0; i< 2; i++){
+		conversionGenre(film->genre[i]);
+		if(i==0){
+			printf(", ");
+		}	
+	}
+	printf("\n");
+
+	//conversionGenre(film->genre);
+
+	//conversionGenre(film->genre);
 }
 
 void rechercheFilm(Film tab[], int taille, char *chercheTitre){
@@ -298,7 +330,7 @@ void recherche_FilmActeur(Film tab[], int taille, const char *name){
 		printf("ERROR : no FILM played by : %s\n", chaine_res);
 	}
 }
-/*void rechercheGenre(Film tab[], int taille, int genre);*/
+/*void rechercheGenre(Film tab[], int taille, Genre genre);*/
 
 void conversionDuree(const Film *film){
 
@@ -319,24 +351,24 @@ void conversionDuree(const Film *film){
 
 void conversionGenre(Genre genre){
 	switch(genre){
-		case 1 : printf("ACTION\n");
+		case 1 : printf("ACTION");
 			break;
-		case 2 : printf("HORREUR\n");
+		case 2 : printf("HORREUR");
 			break;
-		case 3 : printf("COMEDIE\n"); 
+		case 3 : printf("COMEDIE"); 
 			break;
-		case 4 : printf("DOCUMENTAIRE\n");
+		case 4 : printf("DOCUMENTAIRE");
 			break;
-		case 5: printf("POLICIER\n");
+		case 5: printf("POLICIER");
 			break;
-		case 6 : printf("DRAME\n");
+		case 6 : printf("DRAME");
 			break;
-		case 7 : printf("ANIMATION\n");
+		case 7 : printf("ANIMATION");
 			break;
-		case 8 : printf("SCIENCE_FICTION\n");
+		case 8 : printf("SCIENCE_FICTION");
 			break;
 		default : 
-			printf("AUCUN\n");
+			printf(" ");
 			break;
 	}
 
