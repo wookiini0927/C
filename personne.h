@@ -101,7 +101,7 @@ char* minuscules(const char *chaine);
  *			sinon affiche la fiche direct
  * 			sinon : envoi un message d'erreur et propose de le rajouter dans la BDD
  **/
-void rechercheNom(Personne tab[], int taille, const char *nom);
+void rechercheNom(Personne tab[], int taille, const char *nom, Metier stat);
 
 /**
  * Recherche dans la BDD des personnes (acteur ou realisateur) 
@@ -115,7 +115,7 @@ void rechercheNom(Personne tab[], int taille, const char *nom);
  *			sinon affiche la fiche direct
  * 			sinon : envoi un message d'erreur et propose de le rajouter dans la BDD
  **/
-void recherchePrenom(Personne tab[], int taille, const char *prenom);
+void recherchePrenom(Personne tab[], int taille, const char *prenom, Metier stat);
 
 /**
  * Recherche dans la BDD des personnes (acteur ou realisateur) 
@@ -128,7 +128,7 @@ void recherchePrenom(Personne tab[], int taille, const char *prenom);
  * Affiche : une liste d'acteur ou realisateur nee dans l'annee demande
  *			
  **/
-void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee); 
+void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee, Metier stat); 
 
 /**
  * Recherche dans la BDD des personnes (acteur ou realisateur) 
@@ -141,7 +141,7 @@ void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee);
  * Affiche : une liste d'acteur ou realisateur de la nationalite voulu
  *			
  **/
-void rechercheNationalite(Personne tab[], int taille, const char *nationality); 
+void rechercheNationalite(Personne tab[], int taille, const char *nationality, Metier stat); 
 
 /*convertie le metier de la personne en charactere
 *
