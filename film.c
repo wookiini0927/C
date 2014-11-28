@@ -80,7 +80,7 @@ void saisirFilm(Film *film){
 
 void affichageFilm(const Film *film){
 	int i = 0;
-	printf("Fiche FILM\n");
+	printf("\t\tFiche FILM\n");
 	printf("%s (%d)\n", film->titre, film->annee);
 	printf("Realisateur : %s %s\n", film->realisateur.prenom, film->realisateur.nom );
 	printf("Acteurs principaux : ");
@@ -98,80 +98,205 @@ void affichageFilm(const Film *film){
 }
 
 void rechercheFilm(Film tab[], int taille, char *chercheTitre){
-	
+
 	int i = 0;
-	int j = 0;
-	int taille_utile = 0;
+	int cmpt = 0; /*compteur pour savoir si on affiche la liste ou la fiche
+					si cmpt == 1 : fiche
+					si cmpt == 0 : message erreur
+				   */
 
-	char mot[TAILLE];
-	char tab_cp[TAILLE];
-	char *tmp;
+	char *chaine_tmp; //garde en minuscule le nom de recherche
+	char *tmp; //garde en minuscule le nom du tableau realisateur ou acteur
 
-	printf("chaine : %s\n",chercheTitre );
+	chaine_tmp = (char*) malloc(TAILLE*sizeof(char));
+	chaine_tmp = minuscules(chercheTitre); 
 
 
-	//transformer cette boucle en une fonction
-	while(*chercheTitre !='\0'){
-		//convertis en lowercase le titre
-		mot[i] = tolower(*chercheTitre);
-		chercheTitre++;
-		i++;
-	}
-	mot[i] = '\0'; //ajout caractere de fin del igne
-	printf("chaine : %s\n", mot);
+	while(i<taille){
 
-	i=0;
-	while(i<2){
-		printf("\n");
-		printf("chaine a comparer :%s\n", mot );
-		printf("boucle \n");
-		printf("tab titre : %s\n", tab[i].titre );
+		tmp = minuscules(tab[i].titre); 
+		echange_chariot_espace(chaine_tmp);
 
-		while(tab[i].titre[j] !='\0'){
-			printf("taille_utile\n");
-			//recupere la taille du titre dans le tableau
-			taille_utile++;
-			j++;
-		}
-		printf("%d\n", taille_utile );
-		tmp = tab[i].titre;
-
-		printf("tmp %s\n",  tab[i].titre);
-		j=0;
-		while(j<taille_utile){
-			//convertis le titre dans le tableau en lowercase
-			tab_cp[j] = tolower(tmp[j]);
-			j++;	
-		}
-		tab_cp[j] = '\0'; //ajout caractere de finde ligne
-			printf("tab : %s\n", tab_cp);
-
-		if(strcmp(tab_cp, mot) == 0){
-			int comp = strcmp(tab_cp, mot);
-			printf("%d\n", comp );
-			printf("\n");
-			printf("Compare\n");
+		if(strcmp(chaine_tmp, tmp) == 0){
+			cmpt++;
 			affichageFilm(&tab[i]);
 		}
-			i++;
+		i++;
 	}
 
+	if(cmpt == 0){
+		printf("ERROR : no FILM with that title : %s\n", chercheTitre);
+	}
 }
 
+
 void rechercheAnnee(Film tab[], int taille, int chercheAnnee){
-	;
+	int i = 0;
+	int cmpt = 0; /*compteur pour savoir si on affiche la liste ou la fiche
+					si cmpt == 1 : fiche
+					si cmpt == 0 : message erreur
+				   */	
+
+	while(i<taille){
+		if(tab[i].annee == chercheAnnee){
+			cmpt++;
+			printf("%s\n", tab[i].titre);
+		}
+		i++;
+	}
+
+	if(cmpt == 0){
+		printf("ERROR : no FILM out %d\n", chercheAnnee);
+	}
 }
 
 void rechercheDuree(Film tab[], int taille, int critDur){
-	;
+	int i = 0;
+	int cmpt = 0; /*compteur pour savoir si on affiche la liste ou la fiche
+					si cmpt == 1 : fiche
+					si cmpt == 0 : message erreur
+				   */	
+	int plus_dix = 0; //plage d'horaire plus 10min par rapport a critDur
+	int moins_dix = 0; //plage d'horaire moins 10min par rapport a critDur
+
+	plus_dix = critDur+10;
+	moins_dix = critDur-10;
+
+	printf("Intervalle de Duree : [%d,%d] \n", moins_dix, plus_dix);
+	while(i<taille){
+		if(tab[i].duree == critDur || (tab[i].duree < plus_dix && tab[i].duree > moins_dix)){
+			cmpt++;
+			printf("%s (%d)\n", tab[i].titre, tab[i].duree );
+		}
+		i++;
+	}
+
+	if(cmpt == 0){
+		printf("ERROR : no FILM last between [%d,%d]\n", moins_dix, plus_dix);
+	}
 }
 
 void recherche_FilmRealisateur(Film tab[], int taille, const char *name){
-	;
+	int i = 0;
+	int j =0; /*Si res == 0, il faut une variable d'indice pour garder la case du tableau a afficher*/
+	int res; //resultat de strcmp()
+	int cmpt = 0; /*compteur pour savoir si on affiche la liste ou la fiche
+					si cmpt == 1 : fiche
+					si cmpt == 0 : message erreur
+				   */
+
+	char *chaine_tmp; //garde en minuscule le nom de recherche
+	char *tmp; //garde en minuscule le nom du tableau realisateur ou acteur
+	char *chaine_res; //garde en majuscule le nom de recherche
+
+	chaine_tmp = (char*) malloc(TAILLE*sizeof(char));
+	chaine_res = (char*) malloc(TAILLE*sizeof(char));
+	chaine_tmp = minuscules(name); 
+	chaine_res = majuscules(name);
+	echange_chariot_espace(chaine_res);
+
+	do{
+
+		tmp = minuscules(tab[i].realisateur.nom); 
+		echange_chariot_espace(chaine_tmp);
+
+		if(strcmp(chaine_tmp, tmp) == 0){
+			cmpt++;
+			res = strcmp(chaine_tmp, tmp); 
+			j = i;
+		}
+		i++;
+	}while(i<taille || strcmp(chaine_tmp, tmp) == 0);
+
+	if(res == 0){
+		printf("Resultats : %s (%s)\n", chaine_res, tab[j].realisateur.prenom  );
+
+	}
+
+	i=0;
+	cmpt = 0;
+	while(i<taille){
+
+		tmp = minuscules(tab[i].realisateur.nom); 
+		echange_chariot_espace(chaine_tmp);
+
+		if(strcmp(chaine_tmp, tmp) == 0 && cmpt < 5){
+			cmpt++;
+			printf("%s (%d)\n", tab[i].titre, tab[i].annee );
+		}
+		i++;
+	}
+
+	if(cmpt == 0){
+		printf("ERROR : no FILM made by : %s\n", chaine_res);
+	}
 }
 
 void recherche_FilmActeur(Film tab[], int taille, const char *name){
-	;
+	int i = 0;
+	int j1 =0; /*Si res == 0, il faut une variable d'indice pour garder la case du tableau a afficher*/
+	int j2 =0; /*Si res == 0, il faut une variable d'indice pour garder la case du tableau a afficher*/
+	int k = 0; //compteur pour le tableau des casting
+	int res; //resultat de strcmp()
+	int cmpt = 0; /*compteur pour savoir si on affiche la liste ou la fiche
+					si cmpt == 1 : fiche
+					si cmpt == 0 : message erreur
+				   */
+
+	char *chaine_tmp; //garde en minuscule le nom de recherche
+	char *tmp; //garde en minuscule le nom du tableau realisateur ou acteur
+	char *chaine_res; //garde en majuscule le nom de recherche
+
+	chaine_tmp = (char*) malloc(TAILLE*sizeof(char));
+	chaine_res = (char*) malloc(TAILLE*sizeof(char));
+	chaine_tmp = minuscules(name); 
+	chaine_res = majuscules(name);
+	echange_chariot_espace(chaine_res);
+
+	do{
+		k=0;
+		do{
+			tmp = minuscules(tab[i].casting[k].nom); 
+			echange_chariot_espace(chaine_tmp);
+
+			if(strcmp(chaine_tmp, tmp) == 0){
+				cmpt++;
+				res = strcmp(chaine_tmp, tmp); 
+				j1 = i;
+				j2 = k;
+			}
+			k++;
+
+		}while(k<T_C || strcmp(chaine_tmp, tmp) == 0);
+		i++;
+	}while(i<taille || strcmp(chaine_tmp, tmp) == 0);
+
+	if(res == 0){
+		printf("Resultats : %s (%s)\n", chaine_res, tab[j1].casting[j2].prenom);
+
+	}
+
+	i=0;
+	cmpt = 0;
+	while(i<taille){
+		k=0;
+		while(k<T_C){
+
+			tmp = minuscules(tab[i].casting[k].nom); 
+			echange_chariot_espace(chaine_tmp);
+
+			if(strcmp(chaine_tmp, tmp) == 0 && cmpt < 10){
+				cmpt++;
+				printf("%s (%d)\n", tab[i].titre, tab[i].annee );
+			}
+			k++;
+		}
+		i++;
+	}
+
+	if(cmpt == 0){
+		printf("ERROR : no FILM played by : %s\n", chaine_res);
+	}
 }
 /*void rechercheGenre(Film tab[], int taille, int genre);*/
 

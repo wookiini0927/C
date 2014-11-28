@@ -107,7 +107,7 @@ void rechercheAnnee(Film tab[], int taille, int chercheAnnee);
  * Paramètre taille : taille du tableau de film.
  * Paramètre critDur : duree max.
  *
- * Affiche : la liste des film qui dure moins que la duree demande
+ * Affiche : la liste des film qui dure plus ou moins 10min que la duree demande
  * sinon : envoi un message d'erreur
  **/
 void rechercheDuree(Film tab[], int taille, int critDur);
