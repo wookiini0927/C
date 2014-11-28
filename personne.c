@@ -109,6 +109,26 @@ char* minuscules(const char *chaine){
 	return mot;
 }
 
+char* majuscules(const char *chaine){
+	int i = 0; //compteur pour le tableau temporaire
+	char *mot; //pointeur temporaire qui  garde la version minuscule
+
+	mot = (char*) malloc(TAILLE * (sizeof(char)));
+
+	/**
+	*on convertis chaque lettre en minuscule et le stock dans un tableau temporaire
+	**/
+	while(*chaine !='\0'){
+		//convertis en lowercase le titre
+		mot[i] = toupper(*chaine);
+		chaine++;
+		i++;
+	}
+	mot[i] = '\0'; //ajout caractere de fin de ligne
+
+	return mot;
+}
+
 void rechercheNom(Personne tab[], int taille, const char *nom, Metier stat){
 	
 	int i = 0;

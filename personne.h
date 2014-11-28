@@ -89,6 +89,8 @@ void affichagePersonne(const Personne *personne);
 **/
 char* minuscules(const char *chaine);
 
+char* majuscules(const char *chaine);
+
 /**
  * Recherche dans la BDD des personnes (acteur ou realisateur) 
  * l'acteur ou relaisateur ayant le nom demande
