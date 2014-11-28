@@ -89,6 +89,15 @@ void affichagePersonne(const Personne *personne);
 **/
 char* minuscules(const char *chaine);
 
+/**
+*
+* Change la chaine de caractere en majuscules
+* Fonction pour pouvoir par la suite comparer sans sensitive case deux chaines
+*
+* Param chaine : chaine de caractere que l'on veut avoir en majuscule
+*
+* Retourne cette chaine en majuscule
+**/
 char* majuscules(const char *chaine);
 
 /**
