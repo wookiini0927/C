@@ -109,11 +109,12 @@ char* minuscules(const char *chaine){
 	return mot;
 }
 
-void rechercheNom(Personne tab[], int taille, const char *nom){
+void rechercheNom(Personne tab[], int taille, const char *nom, Metier stat){
 	
 	int i = 0;
 	int cmpt = 0; /*compteur pour savoir si on affiche la liste ou la fiche
 					si cmpt == 1 : fiche
+					si cmpt == 0 : message erreur
 					sinon : liste
 				   */ 
 	int j =0; /*Si cmpt == 1, il faut une variable d'indice pour garder la case du tableau a afficher*/
@@ -140,15 +141,22 @@ void rechercheNom(Personne tab[], int taille, const char *nom){
 	if (cmpt == 1){
 		affichagePersonne(&tab[j]);
 	}
+
+	if(cmpt == 0){
+		printf("ERROR : no ");
+		conversionMetier(stat);
+		printf(" with that name : %s\n", nom);
+	}
 }
 
-void recherchePrenom(Personne tab[], int taille, const char *nom){
+void recherchePrenom(Personne tab[], int taille, const char *nom, Metier stat){
 	
 	int i = 0;
 	int cmpt = 0; /*compteur pour savoir si on affiche la liste ou la fiche
 					si cmpt == 1 : fiche
+					si cmpt == 0 : message erreur
 					sinon : liste
-				   */ 
+				   */
 	int j =0; /*Si cmpt == 1, il faut une variable d'indice pour garder la case du tableau a afficher*/
 
 	char *chaine_tmp; //garde en minuscule le prenom chercher
@@ -174,22 +182,44 @@ void recherchePrenom(Personne tab[], int taille, const char *nom){
 	if (cmpt == 1){
 		affichagePersonne(&tab[j]);
 	}	
+	if(cmpt == 0){
+		printf("ERROR : no ");
+		conversionMetier(stat);
+		printf(" with that name : %s\n", nom);
+	}
 }
 
-void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee){
+void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee, Metier stat){
 	int i = 0;
+	int cmpt = 0; /*compteur pour savoir si on affiche la liste ou la fiche
+					si cmpt == 1 : fiche
+					si cmpt == 0 : message erreur
+					sinon : liste
+				   */
 
 	while(i<taille){
 		if(tab[i].dob.annee == chercheAnnee){
 			printf("%s %s (%d)\n", tab[i].prenom, tab[i].nom, tab[i].dob.annee );
+			cmpt++;
 		}
 		i++;
 	}
+
+	if(cmpt == 0){
+		printf("ERROR : no ");
+		conversionMetier(stat);
+		printf(" born in : %d\n", chercheAnnee);
+	}
 }
 
-void rechercheNationalite(Personne tab[], int taille, const char *nationality){
+void rechercheNationalite(Personne tab[], int taille, const char *nationality, Metier stat){
 	
 	int i = 0;
+	int cmpt = 0; /*compteur pour savoir si on affiche la liste ou la fiche
+					si cmpt == 1 : fiche
+					si cmpt == 0 : message erreur
+					sinon : liste
+				   */
 
 	char *chaine_tmp;
 	char *tmp;
@@ -203,16 +233,23 @@ void rechercheNationalite(Personne tab[], int taille, const char *nationality){
 
 		if(strcmp(chaine_tmp, tmp) == 0){
 			printf("%s %s (%s)\n", tab[i].prenom, tab[i].nom, tab[i].nationalite );
+			cmpt++;
 		}
 		i++;
+	}
+
+	if(cmpt == 0){
+		printf("ERROR : no ");
+		conversionMetier(stat);
+		printf(" with that nationality : %s\n", nationality);
 	}
 }
 
 void conversionMetier(Metier statut){
 	switch(statut){
-		case 0 : printf("REALISATEUR\n");
+		case 0 : printf("REALISATEUR");
 			break;
-		case 1 : printf("ACTEUR\n");
+		case 1 : printf("ACTEUR");
 			break;
 		default : 
 			printf("AUCUN\n");
