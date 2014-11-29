@@ -150,12 +150,14 @@ void choix_genre(Film tab[], int taille){
 	printf("---------------------------------\n");
 
 	printf("Quel genre?\n");
-
 	do{
-		fgets(buffer, TAILLE, stdin);
-	}while(verification_digit(buffer) == 0);
-		tmp = atoi(buffer);
-		g = (Genre) tmp;
+		do{
+			fgets(buffer, TAILLE, stdin);
+			
+		}while(verification_digit(buffer) == 0);
+		tmp = atoi(buffer); //trensforme en un entier
+	}while(tmp>9);
+	g = (Genre) tmp; //cast en type genre
 	rechercheGenre(tab, taille, g);
 
 }
