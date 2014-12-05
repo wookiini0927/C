@@ -12,21 +12,25 @@ void test3_menu(){
         fgets(choix, REPONSE, stdin);
     }while(*choix !='A' && *choix !='a' && *choix !='B' && *choix !='b' && *choix !='C' && *choix !='c');
 
-    if (*choix =='C' || *choix =='c'){
         clean(choix);
         printf("chemin du fichier : ");
         fgets(link, BUFFER, stdin);
         echange_chariot_espace(link);
 
         test3(link, choix);
-    }
 }
 
 void test3(const char *fic, char *type){
 
 	FILE *fichier_ouvert; //fichier pointeur tmp sur lequel on va travailler
 	char ligne_lue[BUFFER];
+    char t1[BUFFER], t2[BUFFER], t3[BUFFER];
+    char g1[BUFFER], g2[BUFFER];
 	int nb_lignes =0;
+    int titre = 0;
+    int genre = 0;
+    int conv_g1 =0, conv_g2 = 0;
+    int nb_act = 0;
     int i = 0;
     int j = 0;
 
@@ -54,7 +58,6 @@ void test3(const char *fic, char *type){
 
                     acteur = (Personne*) malloc(nb_lignes * sizeof(Personne)); //alloue la memoire du tableau par rapport au nombre de lignes lues
 
-                    
                     fscanf(fichier_ouvert, "%s ,%s ,%d ,%d ,%d ,%s ", acteur[i].prenom, acteur[i].nom, &acteur[i].dob.jour, &acteur[i].dob.mois, &acteur[i].dob.annee, acteur[i].nationalite);
 
                     acteur[i].statut = 1;
@@ -81,9 +84,49 @@ void test3(const char *fic, char *type){
                     
                     film = (Film*) malloc(nb_lignes * sizeof(Film)); //alloue la memoire du tableau par rapport au nombre de lignes lues
 
-                   // fscanf(fichier_ouvert, "%s ,%d ,%d ,%d ,%s ", film[i].titre, &film[i].annee, &film[i].dob.mois, &film[i].dob.annee, film[i].nationalite);
-            
-                    affichageFilm(&film[i]);
+                    fscanf(fichier_ouvert, "%d :%d :%d :", &titre, &genre, &nb_act);
+                    
+                    if (titre == 1){
+                        printf("dkdjg\n");
+                        if (genre == 1){
+                             if(nb_act == 2){
+                                fscanf(fichier_ouvert,"%s :%d :%s %s :%d :%s :", film[i].titre, &film[i].annee, film[i].realisateur.prenom, film[i].realisateur.nom, &film[i].duree, g1);
+                                while(j<nb_act){
+                                    fscanf(fichier_ouvert, "%s %s ", film[i].casting[j].prenom, film[i].casting[j].nom);
+                                    j++;
+                                }
+
+                                conv_g1 = conversionChartoEnum(g1);
+                                conv_g2 = conversionChartoEnum(g2);
+
+                                film[i].genre[0] = conv_g1;
+                                film[i].genre[1] = conv_g2;
+                                affichageFilm(&film[i]);
+                            }
+                        }
+                        if (genre == 2){
+                            printf("dfkjjg\n");
+                             if(nb_act == 3){
+
+                                fscanf(fichier_ouvert,"%s :%d :%s %s :%d :%s :%s :", film[i].titre, &film[i].annee, film[i].realisateur.prenom, film[i].realisateur.nom, &film[i].duree, g1, g2);
+                                while(j<nb_act){
+                                    fscanf(fichier_ouvert, "%s %s :", film[i].casting[j].prenom, film[i].casting[j].nom);
+                                    j++;
+                                }
+
+                                conv_g1 = conversionChartoEnum(g1);
+                                conv_g2 = conversionChartoEnum(g2);
+
+                                film[i].genre[0] = conv_g1;
+                                film[i].genre[1] = conv_g2;
+                                 printf("conv %d\n", conv_g1 );
+
+                                affichageFilm(&film[i]);
+                            }
+                        }
+                    }
+                    printf("%d %d %d\n", titre, genre, nb_act);
+                   // affichageFilm(&film[i]);
 
                     i++;
                 }
@@ -97,11 +140,29 @@ void test3(const char *fic, char *type){
 
     }
     else{
-        printf("Impossible d'ouvrir le fichier de config\n");
+        printf("Impossible d'ouvrir le fichier de configuration\n");
        // return 1;
     }
 
        
       //  return 0;
+
+}
+
+Genre conversionChartoEnum(const char *string_genre){
+
+    int i =0;
+
+    static struct{
+        const char *chaine;
+        Genre g;
+    }hashmap[] = {{"ACTION", ACTION},{"HORREUR", HORREUR},{"COMEDIE",COMEDIE},{"DOCUMENTAIRE",DOCUMENTAIRE},{"POLICIER",POLICIER}, {"DRAME",DRAME}, {"ANIMATION", ANIMATION}, {"SCIENCE_FICTION", SCIENCE_FICTION}};
+
+    while(strcmp(string_genre, hashmap[i].chaine) != 0){
+        i++;
+    }
+
+    return hashmap[i].g;
+
 
 }

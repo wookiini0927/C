@@ -12,4 +12,12 @@
 void test3_menu();
 void test3(const char* fic, char *type);
 
+/**
+*
+*@src: commentcamarche.net
+*
+**/
+Genre conversionChartoEnum(const char *string_genre);
+
+
 #endif
