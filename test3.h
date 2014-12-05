@@ -10,6 +10,6 @@
 #define BUFFER 128
 
 void test3_menu();
-int test3(const char* fic);
+void test3(const char* fic, char *type);
 
 #endif
