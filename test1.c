@@ -76,10 +76,8 @@ void choix1(Film tab[], int taille){
 		*Affiche sa fiche
 		**/
 		clean(critere);
-		printf("Quel est le film cherchez vous?\n");
-		fgets(buffer, TAILLE, stdin);
-		echange_chariot_espace(buffer);
-		rechercheFilm(tab, taille, buffer);
+		choix_film(tab, taille);
+
 
 	}
 	else if (*critere == 'B' || *critere == 'b'){
@@ -131,6 +129,15 @@ void choix1(Film tab[], int taille){
 
 }
 
+void choix_film(Film tab[], int taille){
+	char buffer[TAILLE];
+
+	printf("Quel est le film cherchez vous?\n");
+	fgets(buffer, TAILLE, stdin);
+	echange_chariot_espace(buffer);
+	rechercheFilm(tab, taille, buffer);
+}
+
 void choix_genre(Film tab[], int taille){
 
 	char buffer[TAILLE];
@@ -138,7 +145,7 @@ void choix_genre(Film tab[], int taille){
 	Genre g;
 
 	printf("--------------Genre--------------\n");
-	printf("|\t0-Acuun\t\t\t|\n");
+	printf("|\t0-Aucun\t\t\t|\n");
 	printf("|\t1-Action\t\t|\n");
 	printf("|\t2-Horreur\t\t|\n");
 	printf("|\t3-Comedie\t\t|\n");

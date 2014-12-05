@@ -21,7 +21,7 @@
 *
 * Renvoi alors un nouveau menu en fonction du choix
 **/
-void test1_menu(Film tab[], Personne real[], Personne acteur[],int taille_film, int taille_r, int taille_act);
+void test1_menu(Film tab[], Personne real[], Personne acteur[], int taille_film, int taille_r, int taille_act);
 
 /**
 * Le critere de recherche se porte sur les informations d'un film
@@ -33,6 +33,8 @@ void test1_menu(Film tab[], Personne real[], Personne acteur[],int taille_film, 
 * Renvoi à la fonction de recherche demander, (dans le fichier film.c)
 **/
 void choix1(Film tab[], int taille);
+
+void choix_film(Film tab[], int taille);
 
 /**
 *
