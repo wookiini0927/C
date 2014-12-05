@@ -49,6 +49,7 @@ void init_tableau_Personne(Personne *p, const char *nom, const char *prenom, con
 void saisirPersonne(Personne *personne){
 
 	char temp[TAILLE];
+	int metier;
 
 	printf("Entrez le nom de la personne : ");
 	fgets(personne->nom, TAILLE, stdin);
@@ -66,11 +67,16 @@ void saisirPersonne(Personne *personne){
 
 	do{
 		do{
-			printf("Est ce un acteur ou un realisateur\n0-Realisateur\n1-Acteur\n");
-			fgets(temp, TAILLE, stdin);
-		}while(verification_digit(temp) == 0 || strlen(temp)>2);
+			do{
+				printf("Est ce un acteur ou un realisateur\n0-Realisateur\n1-Acteur\n");
+				fgets(temp, TAILLE, stdin);
+			}while(verification_digit(temp) == 0 || strlen(temp)>2);
+			metier = atoi(temp);
+		}while(metier>2);
 		personne->statut = atoi(temp);
 	}while(personne->statut != ACTEUR && personne->statut != REALISATEUR);
+	clean(temp);
+
 }
 
 void affichagePersonne(const Personne *personne){
@@ -217,7 +223,11 @@ void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee, Met
 					sinon : liste
 				   */
 
-	while(i<taille){
+	if(chercheAnnee == 0){
+		printf("ERROR : 0 is not a year\n");	
+	}
+
+	while(i<taille &&chercheAnnee!=0){
 		if(tab[i].dob.annee == chercheAnnee){
 			printf("%s %s (%d)\n", tab[i].prenom, tab[i].nom, tab[i].dob.annee );
 			cmpt++;
@@ -225,7 +235,7 @@ void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee, Met
 		i++;
 	}
 
-	if(cmpt == 0){
+	if(cmpt == 0 && chercheAnnee!=0){
 		printf("ERROR : no ");
 		conversionMetier(stat);
 		printf(" born in : %d\n", chercheAnnee);
