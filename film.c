@@ -1,12 +1,6 @@
 #include "film.h"
 #include "personne.h"
-
-/**************************
-*
-*	Derniere MAJ 16/11 :
-*	Ajout : recherche_FilmRealisateur()
-*
-***************************/
+#include "test1.h"
 
 void init_tableau_film(Film *f, const char *titre, const int date, Personne *real, const int duree, const Genre g1,const Genre g2, Personne *a1, Personne *a2, Personne *a3, Personne *a4)
 {
@@ -84,13 +78,15 @@ void saisirFilm(Film *film){
 	i=0;
 	do{
 		do{
-			printf("Genre du film (choisir le chiffre): \n0-AUCUN\n1-ACTION\n2-HORREUR\n3-COMEDIE\n4-DOCUMENTAIRE\n5-POLICIER\n");
-			printf("6-DRAME\n7-ANIMATION\n8-SCIENCE_FICTION\n");
-			fgets(temp, sizeof(temp),stdin);
+			do{
+				printf("Genre du film (choisir le chiffre): \n0-AUCUN\n1-ACTION\n2-HORREUR\n3-COMEDIE\n4-DOCUMENTAIRE\n5-POLICIER\n");
+				printf("6-DRAME\n7-ANIMATION\n8-SCIENCE_FICTION\n");
+				fgets(temp, sizeof(temp),stdin);
 
-		}while(verification_digit(temp) == 0);
+			}while(verification_digit(temp) == 0);
 
-		genre_value = atoi(temp);
+			genre_value = atoi(temp);
+		}while(genre_value>9);
 		film->genre[i] = (Genre) genre_value; //cast l'entier en type enum genre
 		i++;
 	}while(i<2);
@@ -129,13 +125,14 @@ void affichageFilm(const Film *film){
 	//conversionGenre(film->genre);
 }
 
-void rechercheFilm(Film tab[], int taille, char *chercheTitre){
-
+int rechercheFilm(Film tab[], int taille, char *chercheTitre){
 	int i = 0;
 	int cmpt = 0; /*compteur pour savoir si on affiche la liste ou la fiche
 					si cmpt == 1 : fiche
 					si cmpt == 0 : message erreur
 				   */
+	int a_trouve = 1; /* 0 : Pas trouvé
+					   * 1 : trouvé*/
 
 	char *chaine_tmp; //garde en minuscule le nom de recherche
 	char *tmp; //garde en minuscule le nom du tableau realisateur ou acteur
@@ -158,9 +155,12 @@ void rechercheFilm(Film tab[], int taille, char *chercheTitre){
 
 	if(cmpt == 0){
 		printf("ERROR : no FILM with that title : %s\n", chercheTitre);
+		choix_film(tab, taille);
+		a_trouve = 0;
 	}
-}
 
+	return a_trouve;
+}
 
 void rechercheAnnee(Film tab[], int taille, int chercheAnnee){
 	int i = 0;
@@ -169,6 +169,7 @@ void rechercheAnnee(Film tab[], int taille, int chercheAnnee){
 					si cmpt == 0 : message erreur
 				   */	
 
+	printf("Resultats\n");
 	while(i<taille){
 		if(tab[i].annee == chercheAnnee){
 			cmpt++;
@@ -377,7 +378,12 @@ void conversionDuree(const Film *film){
 		heure = film->duree/60;
 		min = film->duree%60;
 
-		printf("%dh%d\n", heure, min );
+		if (min>10){
+			printf("%dh%dmin\n", heure, min );
+		}
+		else{
+			printf("%dh0%dmin\n", heure, min );			
+		}
 	}
 
 }

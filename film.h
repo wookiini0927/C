@@ -76,15 +76,17 @@ void affichageFilm(const Film *film);
 
 /**
  * Recherche dans la BDD des films le titre du film 
+ * Affiche : la fiche du film demandé 
+ * sinon : envoi un message d'erreur et propose de rajotuer une nouvelle fiche
  *
  * Paramètre tab : tableau de films à parcourir.
  * Paramètre taille : taille du tableau de film.
  * Paramètre chercheTitre : titre du film à trouver.
  *
- * Affiche : la fiche du film demandé 
- * sinon : envoi un message d'erreur et propose de rajotuer une nouvelle fiche
+ * retourn 1 si la recherche a abouti
+ * sinon 0 
  **/
-void rechercheFilm(Film tab[], int taille, char *chercheTitre);
+int rechercheFilm(Film tab[], int taille, char *chercheTitre);
 
 /**
  * Recherche dans la BDD des films
