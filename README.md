@@ -4,14 +4,13 @@ C
 Projet C L3Efrei
 =
 ##A faire
-	personne.h :
-		faire un enum pour les nationalites
-	test1.c :
-		verification mauvaise saisie de genre
-
 	General :
 		regler les mauvaise saisie soit rappeler la fonction precedente soit rappeler le tout debut
 =
+
+###5 Decembre
+	test3.c :
+		lecture fichier sur acteur
 ###28 Novembre 
 	film.c : 
 		rechercheTitre fini (+test/error)
