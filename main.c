@@ -1,26 +1,30 @@
-/******************************
-*
-*	Derniere MAJ 26/11 :
-*		Debut initialisation de la BDD en dur
-*
-*******************************/
-
 #include "film.h"
 #include "personne.h"
 #include "test1.h"
 #include "test2.h"
 #include "test3.h"
+#include "fonction_extern.h"
+
 
 int main(int argc, char const *argv[])
 {
-	/* code */
+    nettoie();
 
 	/*Variable locale : choix (type char *), taille 1, reserve en memoire le type d'utilisation*/ 
-	char choix[REPONSE];
 
-	Personne realisateur[16];
-	Personne acteur[35];
-	Film film[10]; 
+	Personne realisateur[TAILLE_DEFAUT];
+	Personne acteur[TAILLE_DEFAUT];
+	Film *film;
+
+	film = (Film*) malloc(TAILLE_DEFAUT * sizeof(Film));
+
+	int taille_utile_film = 10;
+	int taille_utile_real = 16;
+	int taille_utile_acteur = 35;
+
+    /****************************
+    **  BASE DE DONNEE EN DUR  **
+    *****************************/
 
 	/******************
     **  REALISATEUR  **
@@ -30,7 +34,6 @@ int main(int argc, char const *argv[])
     init_tableau_Personne(&realisateur[1], "Scott\0", "Ridley\0", 30,11,1937, "Britannique\0", REALISATEUR);
     init_tableau_Personne(&realisateur[2], "Nolan\0", "Christopher\0", 30,7,1970, "Britannique\0", REALISATEUR);
     init_tableau_Personne(&realisateur[3], "Hazanavicius\0", "Michel\0", 29,3,1967, "Francaise\0", REALISATEUR);
-    init_tableau_Personne(&realisateur[4], "Jackson\0", "Peter\0", 31,10,1961, "Neo zelandaise\0", REALISATEUR);
     init_tableau_Personne(&realisateur[5], "Allen\0", "Woody\0", 1,12,1935, "Americaine\0", REALISATEUR);
     init_tableau_Personne(&realisateur[6], "Scorsese\0", "Martin\0", 17,11,1942, "Americaine\0", REALISATEUR);
     init_tableau_Personne(&realisateur[7], "Kubrick\0", "Stanley\0", 26,7,1928, "Americaine\0", REALISATEUR);
@@ -49,7 +52,7 @@ int main(int argc, char const *argv[])
     **  ACTEUR  **
     *************/
 
-    init_tableau_Personne(&acteur[0], "Dujardin\0", "Jean\0", 19,6,1972, "Francaise\0", ACTEUR);
+    init_tableau_Personne(&acteur[0], "\0", "\0", 0, 0, 0, "\0", ACTEUR);
     init_tableau_Personne(&acteur[1], "Roberts\0", "Julia\0", 28,10,1967, "Americaine\0", ACTEUR);
     init_tableau_Personne(&acteur[2], "Bellucci\0", "Monica\0", 30,9,1964, "Italienne\0", ACTEUR);
     init_tableau_Personne(&acteur[3], "Phoenix\0", "Joaquin\0", 28,10,1974, "Americaine\0", ACTEUR);
@@ -83,52 +86,24 @@ int main(int argc, char const *argv[])
     init_tableau_Personne(&acteur[31], "Evans\0", "Chris\0", 13,6,1981, "Americaine\0", ACTEUR);
     init_tableau_Personne(&acteur[32], "Copley\0", "Sharlto\0", 27,12,1973, "Sud africaine\0", ACTEUR);
     init_tableau_Personne(&acteur[33], "Hemsworth\0","Chris\0", 11,8,1983, "Australienne\0", ACTEUR);
-    init_tableau_Personne(&acteur[34], "\0", "\0", 0, 0, 0, "\0", ACTEUR);
+    init_tableau_Personne(&acteur[34], "Dujardin\0", "Jean\0", 19,6,1972, "Francaise\0", ACTEUR);
 
 
-	/***************
-    ***   FILM   ***
-    ***************/
+	/*************
+    ***  FILM  ***
+    **************/
 
-    init_tableau_film(&film[0], "Avengers\0", 2012, &realisateur[10], 144, ACTION, &acteur[30], &acteur[31], &acteur[23], &acteur[5]);
-    init_tableau_film(&film[1], "Gladiator\0", 2000, &realisateur[1], 155, ACTION, &acteur[4], &acteur[3], &acteur[10], &acteur[33]);
-    init_tableau_film(&film[2], "Intouchables\0", 2011, &realisateur[11], 112, COMEDIE, &acteur[11], &acteur[6], &acteur[12], &acteur[33]);
-    init_tableau_film(&film[3], "Inception\0", 2010, &realisateur[2], 188, SCIENCE_FICTION, &acteur[9], &acteur[5], &acteur[13], &acteur[33]);
-    init_tableau_film(&film[4], "Gravity\0", 2013, &realisateur[0], 90, SCIENCE_FICTION, &acteur[14], &acteur[15], &acteur[16], &acteur[33]);
-    init_tableau_film(&film[5], "Interstellar\0", 2014, &realisateur[2], 169, SCIENCE_FICTION, &acteur[17], &acteur[18], &acteur[19], &acteur[33]);
-    init_tableau_film(&film[6], "Django Unchained\0", 2013, &realisateur[12], 164, ACTION, &acteur[20], &acteur[21], &acteur[9], &acteur[33]);
-    init_tableau_film(&film[7], "Insaisissables\0", 2013, &realisateur[13], 116, POLICIER, &acteur[22], &acteur[23], &acteur[24], &acteur[33]);
-    init_tableau_film(&film[8], "Elysium\0", 2013, &realisateur[14], 110, ACTION, &acteur[25], &acteur[26], &acteur[32], &acteur[33]);
-    init_tableau_film(&film[9], "Australia\0", 2008, &realisateur[15], 155, DRAME, &acteur[27], &acteur[28], &acteur[29], &acteur[33]);
+    init_tableau_film(&film[0], "Avengers\0", 2012, &realisateur[10], 144, ACTION, AUCUN,  &acteur[30], &acteur[31], &acteur[23], &acteur[5]);
+    init_tableau_film(&film[1], "Gladiator\0", 2000, &realisateur[1], 155, ACTION, DRAME, &acteur[4], &acteur[3], &acteur[10], &acteur[0]);
+    init_tableau_film(&film[2], "Intouchables\0", 2011, &realisateur[11], 112, COMEDIE, AUCUN, &acteur[11], &acteur[6], &acteur[12], &acteur[0]);
+    init_tableau_film(&film[3], "Inception\0", 2010, &realisateur[2], 188, SCIENCE_FICTION, AUCUN, &acteur[9], &acteur[13], &acteur[0], &acteur[0]);
+    init_tableau_film(&film[4], "Gravity\0", 2013, &realisateur[0], 90, SCIENCE_FICTION, AUCUN, &acteur[14], &acteur[15], &acteur[16], &acteur[0]);
+    init_tableau_film(&film[5], "Interstellar\0", 2014, &realisateur[2], 169, SCIENCE_FICTION, DRAME, &acteur[17], &acteur[18], &acteur[19], &acteur[0]);
+    init_tableau_film(&film[6], "Django Unchained\0", 2013, &realisateur[12], 164, ACTION, AUCUN, &acteur[20], &acteur[21], &acteur[9], &acteur[0]);
+    init_tableau_film(&film[7], "Insaisissables\0", 2013, &realisateur[13], 116, POLICIER, AUCUN, &acteur[22], &acteur[23], &acteur[24], &acteur[0]);
+    init_tableau_film(&film[8], "Elysium\0", 2013, &realisateur[14], 110, ACTION, SCIENCE_FICTION, &acteur[25], &acteur[26], &acteur[32], &acteur[0]);
+    init_tableau_film(&film[9], "Australia\0", 2008, &realisateur[15], 155, DRAME, AUCUN, &acteur[27], &acteur[28], &acteur[29], &acteur[0]);
 
-	/*On choisis de quel maniere on va utiliser les BDD*/
-	do{
-		printf("----------------------Choix----------------------\n");
-		printf("|\tA-Recherche dans une BDD prédefinie\t|\n");
-		printf("|\tB-Creez votre propre BDD\t\t|\n");
-		printf("|\tC-Creez votre BDD a partir d'un fichier\t|\n");
-		printf("-------------------------------------------------\n");
-		
-		fgets(choix,REPONSE,stdin);
-
-	}while(*choix !='A' && *choix !='a' && *choix !='B' && *choix !='b' && *choix != 'C' && *choix != 'c');
-
-	if (*choix == 'A' || *choix == 'a'){
-		//BDD déja existante
-		clean(choix); // evite le conflit entre la variable choix du main et la variable choix de test1.c
-		test1_menu(film, realisateur, acteur, 10, 16, 35);
-	}
-	else if (*choix == 'B' || *choix == 'b'){
-		//saisie manuelle
-		clean(choix);
-		test2();
-	}
-	else if (*choix == 'C' || *choix == 'c'){
-		//creation d'une BDD a partir d'un fichier
-		clean(choix);
-		test3_menu();
-	}
-
-
+    menu_principal(film, realisateur, acteur, taille_utile_film, taille_utile_real, taille_utile_acteur);
 	return 0;
 }
