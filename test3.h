@@ -4,20 +4,19 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <regex.h>
 #include "film.h"
 #include "personne.h"
 
 #define BUFFER 128
 
+int verification_lien(char *link, char *type);
 void test3_menu();
-void test3(const char* fic, char *type);
+void fichier_film(char *type);
+void fichier_acteur_real(char *type);
+void test3(const char *fic, char *type);
 
-/**
-*
-*@src: commentcamarche.net
-*
-**/
-Genre conversionChartoEnum(const char *string_genre);
+
 
 
 #endif
