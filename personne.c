@@ -1,5 +1,6 @@
 #include "personne.h"
 #include "date.h"
+#include "test1.h"
 
 void purger(void){   
 	int c;
@@ -46,36 +47,41 @@ void init_tableau_Personne(Personne *p, const char *nom, const char *prenom, con
 
 }
 
-void saisirPersonne(Personne *personne){
+void saisirPersonne(Personne tab[], int taille,Personne *pers){
 
 	char temp[TAILLE];
 	int metier;
 
 	printf("Entrez le nom de la personne : ");
-	fgets(personne->nom, TAILLE, stdin);
-	echange_chariot_espace(personne->nom);
+	fgets(pers->nom, TAILLE, stdin);
+	echange_chariot_espace(pers->nom);
 
-	printf("Entre le prenom de la personne : ");
-	fgets(personne->prenom, TAILLE, stdin);
-	echange_chariot_espace(personne->prenom);
+	printf("Entrez le prenom de la personne : ");
+	fgets(pers->prenom, TAILLE, stdin);
+	echange_chariot_espace(pers->prenom);
 
 	printf("Entrez la date de naissance (JJ/M/AAAA)\n");
-	saisirDate(&personne->dob);
+	saisirDate(&pers->dob);
 
 	printf("Entrez la nationalite : ");
-	fgets(personne->nationalite, TAILLE, stdin);
+	fgets(pers->nationalite, TAILLE, stdin);
+	echange_chariot_espace(pers->nationalite);
+
 
 	do{
 		do{
 			do{
 				printf("Est ce un acteur ou un realisateur\n0-Realisateur\n1-Acteur\n");
 				fgets(temp, TAILLE, stdin);
+
 			}while(verification_digit(temp) == 0 || strlen(temp)>2);
 			metier = atoi(temp);
 		}while(metier>2);
-		personne->statut = atoi(temp);
-	}while(personne->statut != ACTEUR && personne->statut != REALISATEUR);
+		pers->statut = metier;
+	}while(pers->statut != ACTEUR && pers->statut != REALISATEUR);
 	clean(temp);
+
+	tab[taille] = *pers;
 
 }
 
@@ -146,10 +152,18 @@ void rechercheNom(Personne tab[], int taille, const char *nom, Metier stat){
 	int j =0; /*Si cmpt == 1, il faut une variable d'indice pour garder la case du tableau a afficher*/
 
 	char *chaine_tmp; //garde en minuscule le nom de recherche
+	char *chaine_res; //garde en majuscule le nom de recherche
 	char *tmp; //garde en minuscule le nom du tableau realisateur ou acteur
 
 	chaine_tmp = (char*) malloc(TAILLE*sizeof(char));
+	chaine_res = (char*) malloc(TAILLE*sizeof(char));
+
 	chaine_tmp = minuscules(nom); 
+	chaine_res = majuscules(nom); //passe la chaine en majuscules
+	echange_chariot_espace(chaine_res);
+
+	
+	printf("Resultats : %s \n", chaine_res );
 
 	while(i<taille){
 
@@ -157,7 +171,7 @@ void rechercheNom(Personne tab[], int taille, const char *nom, Metier stat){
 		echange_chariot_espace(chaine_tmp);
 
 		if(strcmp(chaine_tmp, tmp) == 0){
-			printf("%s %s\n", tab[i].prenom, tab[i].nom );
+			printf(" |%s %s\n", tab[i].prenom, tab[i].nom );
 			cmpt++;
 			j = i;
 		}
@@ -172,6 +186,7 @@ void rechercheNom(Personne tab[], int taille, const char *nom, Metier stat){
 		printf("ERROR : no ");
 		conversionMetier(stat);
 		printf(" with that name : %s\n", nom);
+        appelRechercheNom(tab, taille,stat);
 	}
 }
 
@@ -187,9 +202,17 @@ void recherchePrenom(Personne tab[], int taille, const char *nom, Metier stat){
 
 	char *chaine_tmp; //garde en minuscule le prenom chercher
 	char *tmp; // garde en minusucles les prenom du tableau a chaque appel	
+	char *chaine_res; //garde en majuscule le nom de recherche
 
 	chaine_tmp = (char*) malloc(TAILLE*sizeof(char));
+	chaine_res = (char*) malloc(TAILLE*sizeof(char));
+
 	chaine_tmp = minuscules(nom);
+	chaine_res = majuscules(nom); //passe la chaine en majuscules
+	echange_chariot_espace(chaine_res);
+
+	
+	printf("Resultats : %s \n", chaine_res );
 
 	while(i<taille){
 
@@ -197,7 +220,7 @@ void recherchePrenom(Personne tab[], int taille, const char *nom, Metier stat){
 		echange_chariot_espace(chaine_tmp);
 
 		if(strcmp(chaine_tmp, tmp) == 0){
-			printf("%s %s\n", tab[i].prenom, tab[i].nom );
+			printf(" |%s %s\n", tab[i].prenom, tab[i].nom );
 			cmpt++;
 			j = i;
 		}
@@ -212,6 +235,8 @@ void recherchePrenom(Personne tab[], int taille, const char *nom, Metier stat){
 		printf("ERROR : no ");
 		conversionMetier(stat);
 		printf(" with that name : %s\n", nom);
+        appelRecherchePrenom(tab, taille,stat);
+
 	}
 }
 
@@ -223,13 +248,13 @@ void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee, Met
 					sinon : liste
 				   */
 
-	if(chercheAnnee == 0){
-		printf("ERROR : 0 is not a year\n");	
+	if(chercheAnnee < 1799){
+		printf("ERROR : YEAR NOT FOUND\n");	
 	}
-
+	printf("Resultats : %d\nPrenom Nom (JJ/M)\n", chercheAnnee);
 	while(i<taille &&chercheAnnee!=0){
 		if(tab[i].dob.annee == chercheAnnee){
-			printf("%s %s (%d)\n", tab[i].prenom, tab[i].nom, tab[i].dob.annee );
+			printf(" |%s %s (%d/%d)\n", tab[i].prenom, tab[i].nom, tab[i].dob.jour, tab[i].dob.mois );
 			cmpt++;
 		}
 		i++;
@@ -239,6 +264,8 @@ void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee, Met
 		printf("ERROR : no ");
 		conversionMetier(stat);
 		printf(" born in : %d\n", chercheAnnee);
+		appelRechercheNaissance(tab, taille,stat);
+
 	}
 }
 
@@ -251,18 +278,27 @@ void rechercheNationalite(Personne tab[], int taille, const char *nationality, M
 					sinon : liste
 				   */
 
-	char *chaine_tmp;
-	char *tmp;
+	char *chaine_tmp; //garde en minuscule le nom de recherche
+	char *tmp; //garde en minuscule le nom du tableau realisateur ou acteur
+	char *chaine_res; //garde en majuscule le nom de recherche
+
 	chaine_tmp = (char*) malloc(TAILLE*sizeof(char));
+	chaine_res = (char*) malloc(TAILLE*sizeof(char));
 
 	chaine_tmp = minuscules(nationality);
+	chaine_res = majuscules(nationality); //passe la chaine en majuscules
+	echange_chariot_espace(chaine_res);
 
+	
+	printf("Resultats : %s (Prenom Nom (annee))\n", chaine_res );
+
+	
 	while(i<taille){
 		tmp = minuscules(tab[i].nationalite);
 		echange_chariot_espace(chaine_tmp);
 
 		if(strcmp(chaine_tmp, tmp) == 0){
-			printf("%s %s (%s)\n", tab[i].prenom, tab[i].nom, tab[i].nationalite );
+			printf(" |%s %s (%d)\n", tab[i].prenom, tab[i].nom, tab[i].dob.annee );
 			cmpt++;
 		}
 		i++;
@@ -272,6 +308,8 @@ void rechercheNationalite(Personne tab[], int taille, const char *nationality, M
 		printf("ERROR : no ");
 		conversionMetier(stat);
 		printf(" with that nationality : %s\n", nationality);
+        appelRechercheNationalite(tab, taille,stat);
+
 	}
 }
 

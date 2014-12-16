@@ -5,11 +5,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+
 #include "personne.h"
 
-/********************************
-DEFINITION D'UN FILM et GENRE
-*********************************/
+/**********************************
+** DEFINITION D'UN FILM et GENRE **
+***********************************/
 
 #define TAILLE 64
 #define REPONSE 2
@@ -21,7 +22,7 @@ typedef enum Genre{
 	ACTION,
 	HORREUR,
 	COMEDIE,
-	DOCUMENTAIRE,
+	FANTASTIQUE,
 	POLICIER,
 	DRAME,
 	ANIMATION,
@@ -38,11 +39,10 @@ typedef struct Film{
 }Film;
 
 /******************************
-FONCTIONS
+**         FONCTIONS         **
 *******************************/
 
 /**
-*
 * initialisation de la BDD en dur
 *
 * Parametre f : pointeur qui sera la case du tableau
@@ -55,17 +55,23 @@ FONCTIONS
 * Param a2 : acteur 2
 * Param a3 : acteur 3
 * Param a4 : acteur 4
-*
 **/
 void init_tableau_film(Film *f, const char *titre, const int date, Personne *real, const int duree, const Genre g1, const Genre g2, Personne *a1, Personne *a2, Personne *a3, Personne *a4);
 
 /**
  * Saisie manuelle des films dans la BDD
  *
- * Paramètre film : le film a rajouter
- *
+ * Param tab : tableau de film sur lequel on rajoute la nouvelle fiche
+ * Param real : tableau de realisateur
+ * Param act : tableau d'acteur
+ * Param taille_f : taille utile du tableau film
+ * Param taille_r : taille utile du tableau realisateur
+ * Param taille_a : taille utile du tableau acteur
+ * Param film : pointeur de type Film, temporaire
+ * 
+ * Enregistre le pointeur temporaire dans le tableau film au rang taille_f
  **/
-void saisirFilm(Film* film);
+void saisirFilm(Film tab[], Personne real[], Personne act[], int taille_f, int taille_r, int taille_a, Film* film);
 
 /**
  * Affiche les informations du film
@@ -80,78 +86,102 @@ void affichageFilm(const Film *film);
  * sinon : envoi un message d'erreur et propose de rajotuer une nouvelle fiche
  *
  * Paramètre tab : tableau de films à parcourir.
- * Paramètre taille : taille du tableau de film.
- * Paramètre chercheTitre : titre du film à trouver.
+ * Param real : tableau de realisateur
+ * Param act : tableau d'acteur
+ * Param taille_f : taille utile du tableau film
+ * Param taille_r : taille utile du tableau realisateur
+ * Param taille_a : taille utile du tableau acteur
+ * Param chercheTitre : titre recherche
  *
- * retourn 1 si la recherche a abouti
+ * retourne 1 si la recherche a abouti
  * sinon 0 
  **/
-int rechercheFilm(Film tab[], int taille, char *chercheTitre);
+int rechercheFilm(Film tab[], Personne real[], Personne acteur[], int taille_f, int taille_r, int taille_a, char *chercheTitre);
 
 /**
  * Recherche dans la BDD des films
  * tous les films sortie dans une annee donne
  *
  * Paramètre tab : tableau de films à parcourir.
- * Paramètre taille : taille du tableau de film.
+ * Param real : tableau de realisateur
+ * Param act : tableau d'acteur
+ * Param taille_f : taille utile du tableau film
+ * Param taille_r : taille utile du tableau realisateur
+ * Param taille_a : taille utile du tableau acteur
  * Paramètre chercheAnnee : annee des film à trouver.
  *
  * Affiche : la liste des film sortie sur l'annee demande
  * sinon : envoi un message d'erreur
  **/
-void rechercheAnnee(Film tab[], int taille, int chercheAnnee);
+void rechercheAnnee(Film tab[], Personne real[], Personne acteur[], int taille_f, int taille_r, int taille_a, int chercheAnnee);
 
 /**
  * Recherche dans la BDD des films,
  * tous les films qui dure moins qu'une duree donnee 
  *
  * Paramètre tab : tableau de films à parcourir.
- * Paramètre taille : taille du tableau de film.
+ * Param real : tableau de realisateur
+ * Param act : tableau d'acteur
+ * Param taille_f : taille utile du tableau film
+ * Param taille_r : taille utile du tableau realisateur
+ * Param taille_a : taille utile du tableau acteur
  * Paramètre critDur : duree max.
  *
  * Affiche : la liste des film qui dure plus ou moins 10min que la duree demande
  * sinon : envoi un message d'erreur
  **/
-void rechercheDuree(Film tab[], int taille, int critDur);
+void rechercheDuree(Film tab[], Personne real[], Personne acteur[], int taille_f, int taille_r, int taille_a, int critDur);
 
 /**
  * Recherche dans la BDD des films,
  * tous les films du genre demandé
  *
  * Paramètre tab : tableau de films à parcourir.
- * Paramètre taille : taille du tableau de film.
+ * Param real : tableau de realisateur
+ * Param act : tableau d'acteur
+ * Param taille_f : taille utile du tableau film
+ * Param taille_r : taille utile du tableau realisateur
+ * Param taille_a : taille utile du tableau acteur
  * Paramètre genre : genre recherché.
  *
  * Affiche : la liste des film qui dure moins que la duree demande
  * sinon : envoi un message d'erreur
  **/
-void rechercheGenre(Film tab[], int taille, Genre genre);
+void rechercheGenre(Film tab[], Personne real[], Personne acteur[], int taille_f, int taille_r, int taille_a, Genre genre);
 
 /**
  * Recherche dans la BDD des films,
  * tous les films du realisateur demandé
  *
  * Paramètre tab : tableau de films à parcourir.
- * Paramètre taille : taille du tableau de film.
+ * Param real : tableau de realisateur
+ * Param act : tableau d'acteur
+ * Param taille_f : taille utile du tableau film
+ * Param taille_r : taille utile du tableau realisateur
+ * Param taille_a : taille utile du tableau acteur
  * Paramètre name : nom ou prenom du realisateur.
  *
  * Affiche : la liste des film fait par le realisateur
  * sinon : envoi un message d'erreur
  **/
-void recherche_FilmRealisateur(Film tab[], int taille, const char *name);
+void recherche_FilmRealisateur(Film tab[], Personne real[], Personne acteur[], int taille_f, int taille_r, int taille_a, const char *name);
 
 /**
  * Recherche dans la BDD des films,
  * tous les films de l'acteur/actrice demandé
  *
  * Paramètre tab : tableau de films à parcourir.
- * Paramètre taille : taille du tableau de film.
+ * Param real : tableau de realisateur
+ * Param act : tableau d'acteur
+ * Param taille_f : taille utile du tableau film
+ * Param taille_r : taille utile du tableau realisateur
+ * Param taille_a : taille utile du tableau acteur
  * Paramètre name : nom ou prenom du realisateur.
  *
  * Affiche : la liste des film dans lequel joue l'acteur/actrice
  * sinon : envoi un message d'erreur
  **/
-void recherche_FilmActeur(Film tab[], int taille, const char *name);
+void recherche_FilmActeur(Film tab[], Personne real[], Personne acteur[], int taille_f, int taille_r, int taille_a, const char *name);
 
 /**
 * convertie la duree rentree en minutes en heures et minutes
@@ -167,5 +197,12 @@ void conversionDuree(const Film *film);
 * Affiche : le genre en chaine de caractere
 **/
 void conversionGenre(Genre genre);
+
+/**
+*
+*@src: commentcamarche.net
+*
+**/
+Genre conversionChartoEnum(const char *string_genre);
 
 #endif

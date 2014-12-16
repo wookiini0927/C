@@ -69,12 +69,12 @@ void init_tableau_Personne(Personne *p, const char *nom, const char *prenom, con
  * Paramètre personne : la personne a rajouter
  *
  **/
-void saisirPersonne(Personne *personne);
+void saisirPersonne(Personne tab[], int taille, Personne *pers);
 
 /**
  * Affiche les informations de la personne
  *
- * Paramètre film : la personne dont on veut les elements.
+ * Paramètre personne : la personne dont on veut les elements.
  **/
 void affichagePersonne(const Personne *personne);
 
@@ -106,11 +106,12 @@ char* majuscules(const char *chaine);
  *
  * Paramètre tab : tableau de realisateur ou acteur à parcourir.
  * Paramètre taille : taille du tableau de realisateur ou acteur.
- * Paramètre nom : trouver la fiche de la personne par son prenom
+ * Paramètre nom : trouver la fiche de la personne par son nom
+ * Parametre stat : precise le metier de la personne
  *
  * Affiche : une liste s'il y en a plusieurs,
  *			sinon affiche la fiche direct
- * 			sinon : envoi un message d'erreur et propose de le rajouter dans la BDD
+ * 			sinon : envoi un message d'erreur et demande une nouvelle recherche
  **/
 void rechercheNom(Personne tab[], int taille, const char *nom, Metier stat);
 
@@ -121,10 +122,11 @@ void rechercheNom(Personne tab[], int taille, const char *nom, Metier stat);
  * Paramètre tab : tableau de realisateur ou acteur à parcourir.
  * Paramètre taille : taille du tableau de realisateur ou acteur.
  * Paramètre prenom : trouver la fiche de la personne par son prenom
+ * Parametre stat : precise le metier de la personne
  *
  * Affiche : une liste s'il y en a plusieurs,
  *			sinon affiche la fiche direct
- * 			sinon : envoi un message d'erreur et propose de le rajouter dans la BDD
+ * 			sinon : envoi un message d'erreur et demande une nouvelle recherche
  **/
 void recherchePrenom(Personne tab[], int taille, const char *prenom, Metier stat);
 
@@ -134,9 +136,10 @@ void recherchePrenom(Personne tab[], int taille, const char *prenom, Metier stat
  *
  * Paramètre tab : tableau de realisateur ou acteur à parcourir.
  * Paramètre taille : taille du tableau de realisateur ou acteur.
- * Paramètre prenom : trouver la fiche de la personne par son prenom
- *
+ * Paramètre chercheAnnee : trouver la fiche de la personne par son annee de naissance
+ * Parametre stat : precise le metier de la personne
  * Affiche : une liste d'acteur ou realisateur nee dans l'annee demande
+ * 			 sinon demande une nouvelle recherche
  *			
  **/
 void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee, Metier stat); 
@@ -147,9 +150,10 @@ void recherche_naissance_Annee(Personne tab[], int taille, int chercheAnnee, Met
  *
  * Paramètre tab : tableau de realisateur ou acteur à parcourir.
  * Paramètre taille : taille du tableau de realisateur ou acteur.
- * Paramètre prenom : trouver la fiche de la personne par son prenom
- *
+ * Paramètre nationality : trouver la fiche de la personne par sa nationalite
+ * Parametre stat : precise le metier de la personne
  * Affiche : une liste d'acteur ou realisateur de la nationalite voulu
+ * 			 sinon demande une nouvelle recherche
  *			
  **/
 void rechercheNationalite(Personne tab[], int taille, const char *nationality, Metier stat); 
