@@ -14,9 +14,5 @@ int verification_lien(char *link, char *type);
 void test3_menu();
 void fichier_film(char *type);
 void fichier_acteur_real(char *type);
-void test3(const char *fic, char *type);
-
-
-
 
 #endif
